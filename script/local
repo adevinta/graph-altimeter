@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Exit on error and undefined variable.
+set -e -u
+
+# Set working directory to the root of the repo.
+cd "$(dirname "$0")/.."
+
+# Parse command line arguments.
+if [ $# -ne 1 ]; then
+	echo "usage: $0 envfile" >&2
+	exit 2
+fi
+export ENV_FILE=$1
+echo "Env file: ${ENV_FILE}"
+
+# Run the docker-compose local environment.
+DOCKER_COMPOSE_PROJECT='graph-altimeter-local'
+docker-compose -p "${DOCKER_COMPOSE_PROJECT}" build graph-altimeter-local
+docker-compose -p "${DOCKER_COMPOSE_PROJECT}" run graph-altimeter-local

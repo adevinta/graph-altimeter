@@ -1,0 +1,15 @@
+# vim
+*.swp
+
+# pytest-cov
+.coverage
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__

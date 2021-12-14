@@ -1,0 +1,7 @@
+[MESSAGES CONTROL]
+
+disable=duplicate-code,too-many-public-methods,too-few-public-methods,fixme
+
+[BASIC]
+
+good-names=i, j, k, v, e, g, id, _, __

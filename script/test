@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Exit on error and undefined variable.
+set -e -u
+
+# Set working directory to the root of the repo.
+cd "$(dirname $0)/.."
+
+# Set pytest flags.
+export PYTEST_FLAGS=$@
+echo "pytest flags: '${PYTEST_FLAGS}'"
+
+# Run the docker-compose test environment.
+DOCKER_COMPOSE_PROJECT='graph-altimeter-test'
+docker-compose -p "${DOCKER_COMPOSE_PROJECT}" build graph-altimeter-test
+docker-compose -p "${DOCKER_COMPOSE_PROJECT}" run graph-altimeter-test

@@ -1,0 +1,1721 @@
+[
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ap-southeast-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-3"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-northeast-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-2"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "af-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/af-south-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-west-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-2"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-gov-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-gov-east-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-west-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ca-central-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ca-central-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "eu-central-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-central-1"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-gov-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-gov-east-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "us-gov-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-gov-east-1"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-northeast-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "statement",
+      "effect": "Allow",
+      "action": "sts:AssumeRole"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-south-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ap-east-1",
+      "opt_in_status": "not-opted-in",
+      "arn": "arn:aws:::123456789012:region/ap-east-1"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-west-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    },
+    "T.v_out": {
+      "T.label": "lambda:function",
+      "function_name": "test_lambda_function_1",
+      "runtime": "python3.7",
+      "arn": "arn:aws:lambda:us-east-1:123456789012:function:test_lambda_function_1"
+    }
+  },
+  {
+    "T.label": "assume_role_policy_document",
+    "T.v_in": {
+      "T.label": "assume_role_policy_document",
+      "version": "2012-10-17"
+    },
+    "T.v_out": {
+      "T.label": "iam:role",
+      "name": "test_role_1",
+      "description": "Test Role 1",
+      "arn": "arn:aws:iam::123456789012:role/test_role_1",
+      "max_session_duration": 3600,
+      "assume_role_policy_document_text": "{\"Statement\": [{\"Action\": \"sts:AssumeRole\", \"Effect\": \"Allow\", \"Principal\": {\"Service\": \"lambda.amazonaws.com\"}, \"Sid\": \"\"}], \"Version\": \"2012-10-17\"}"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    },
+    "T.v_out": {
+      "T.label": "ec2:flow-log",
+      "flow_log_status": "ACTIVE",
+      "log_format": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "log_destination": "arn:aws:s3:::test_bucket",
+      "traffic_type": "ALL",
+      "deliver_logs_status": "SUCCESS",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:flow-log/fl-290d1baa",
+      "log_destination_type": "s3"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "lambda:function",
+      "function_name": "test_lambda_function_1",
+      "runtime": "python3.7",
+      "arn": "arn:aws:lambda:us-east-1:123456789012:function:test_lambda_function_1"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "iam:policy",
+      "policy_id": "AWCHQMVWQZCZDLB1XJO5P",
+      "name": "test_policy_1",
+      "default_version_policy_document_text": "{\"Statement\": [{\"Action\": \"logs:CreateLogGroup\", \"Effect\": \"Allow\", \"Resource\": \"*\"}], \"Version\": \"2012-10-17\"}",
+      "arn": "arn:aws:iam::123456789012:policy/test_policy_1",
+      "default_version_id": "v1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ap-northeast-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    },
+    "T.v_out": {
+      "T.label": "s3:bucket",
+      "name": "test_bucket",
+      "arn": "arn:aws:s3:us-east-1:123456789012:bucket/test_bucket"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "s3:bucket",
+      "name": "test_bucket",
+      "arn": "arn:aws:s3:us-east-1:123456789012:bucket/test_bucket"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "s3:bucket",
+      "name": "test_bucket",
+      "arn": "arn:aws:s3:us-east-1:123456789012:bucket/test_bucket"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "ec2:vpc",
+      "cidr_block": "10.0.0.0/16",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:vpc/vpc-b4679527",
+      "is_default": true
+    },
+    "T.v_out": {
+      "T.label": "ec2:subnet",
+      "last_ip": 167772415,
+      "cidr_block": "10.0.0.0/24",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:subnet/subnet-20d4e2fd",
+      "first_ip": 167772160
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ap-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-south-1"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-gov-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-gov-west-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "statement",
+      "effect": "Allow",
+      "action": "sts:AssumeRole"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-2"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "cn-north-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/cn-north-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "principal",
+      "service": "lambda.amazonaws.com"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "eu-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-1"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-north-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-north-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "iam:policy",
+      "policy_id": "AWCHQMVWQZCZDLB1XJO5P",
+      "name": "test_policy_1",
+      "default_version_policy_document_text": "{\"Statement\": [{\"Action\": \"logs:CreateLogGroup\", \"Effect\": \"Allow\", \"Resource\": \"*\"}], \"Version\": \"2012-10-17\"}",
+      "arn": "arn:aws:iam::123456789012:policy/test_policy_1",
+      "default_version_id": "v1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "ec2:volume",
+      "availability_zone": "us-east-1a",
+      "volume_type": "gp2",
+      "size": 128,
+      "encrypted": false,
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:volume/vol-ee1444e3"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "ec2:flow-log",
+      "flow_log_status": "ACTIVE",
+      "log_format": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "log_destination": "arn:aws:s3:::test_bucket",
+      "traffic_type": "ALL",
+      "deliver_logs_status": "SUCCESS",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:flow-log/fl-290d1baa",
+      "log_destination_type": "s3"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "ec2:vpc",
+      "cidr_block": "10.0.0.0/16",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:vpc/vpc-b4679527",
+      "is_default": true
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "principal",
+    "T.v_in": {
+      "T.label": "principal",
+      "service": "lambda.amazonaws.com"
+    },
+    "T.v_out": {
+      "T.label": "statement",
+      "effect": "Allow",
+      "action": "sts:AssumeRole"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "us-east-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "universe_of",
+    "T.v_in": {
+      "T.label": "altimeter_snapshot"
+    },
+    "T.v_out": {
+      "T.label": "Universe",
+      "namespace": "altimeter",
+      "version": 1
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "us-gov-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-gov-west-1"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "assume_role_policy_document",
+      "version": "2012-10-17"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "ec2:flow-log",
+      "flow_log_status": "ACTIVE",
+      "log_format": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "log_destination": "arn:aws:s3:::test_bucket",
+      "traffic_type": "ALL",
+      "deliver_logs_status": "SUCCESS",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:flow-log/fl-290d1baa",
+      "log_destination_type": "s3"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "us-west-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-west-2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-gov-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-gov-west-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-central-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-central-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "transient_resource_link",
+    "T.v_in": {
+      "T.label": "ec2:vpc",
+      "cidr_block": "10.0.0.0/16",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:vpc/vpc-b4679527",
+      "is_default": true
+    },
+    "T.v_out": {
+      "T.label": "ec2:flow-log",
+      "flow_log_status": "ACTIVE",
+      "log_format": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "log_destination": "arn:aws:s3:::test_bucket",
+      "traffic_type": "ALL",
+      "deliver_logs_status": "SUCCESS",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:flow-log/fl-290d1baa",
+      "log_destination_type": "s3"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "eu-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-south-1"
+    }
+  },
+  {
+    "T.label": "statement",
+    "T.v_in": {
+      "T.label": "statement",
+      "effect": "Allow",
+      "action": "sts:AssumeRole"
+    },
+    "T.v_out": {
+      "T.label": "assume_role_policy_document",
+      "version": "2012-10-17"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "me-south-1",
+      "opt_in_status": "not-opted-in",
+      "arn": "arn:aws:::123456789012:region/me-south-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-east-1",
+      "opt_in_status": "not-opted-in",
+      "arn": "arn:aws:::123456789012:region/ap-east-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "lambda:function",
+      "function_name": "test_lambda_function_1",
+      "runtime": "python3.7",
+      "arn": "arn:aws:lambda:us-east-1:123456789012:function:test_lambda_function_1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-central-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-central-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "us-west-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-west-1"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "me-south-1",
+      "opt_in_status": "not-opted-in",
+      "arn": "arn:aws:::123456789012:region/me-south-1"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-southeast-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-3"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-west-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-west-2"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-northeast-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-3"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-southeast-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "sa-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/sa-east-1"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-southeast-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-3"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-south-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-southeast-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-2"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "iam:role",
+      "name": "test_role_1",
+      "description": "Test Role 1",
+      "arn": "arn:aws:iam::123456789012:role/test_role_1",
+      "max_session_duration": 3600,
+      "assume_role_policy_document_text": "{\"Statement\": [{\"Action\": \"sts:AssumeRole\", \"Effect\": \"Allow\", \"Principal\": {\"Service\": \"lambda.amazonaws.com\"}, \"Sid\": \"\"}], \"Version\": \"2012-10-17\"}"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "cn-northwest-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/cn-northwest-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "ec2:subnet",
+      "last_ip": 167772415,
+      "cidr_block": "10.0.0.0/24",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:subnet/subnet-20d4e2fd",
+      "first_ip": 167772160
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ap-southeast-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-1"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "ec2:subnet",
+      "last_ip": 167772415,
+      "cidr_block": "10.0.0.0/24",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:subnet/subnet-20d4e2fd",
+      "first_ip": 167772160
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-northeast-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-2"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-north-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-north-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "ec2:volume",
+      "availability_zone": "us-east-1a",
+      "volume_type": "gp2",
+      "size": 128,
+      "encrypted": false,
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:volume/vol-ee1444e3"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-west-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-3"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "iam:role",
+      "name": "test_role_1",
+      "description": "Test Role 1",
+      "arn": "arn:aws:iam::123456789012:role/test_role_1",
+      "max_session_duration": 3600,
+      "assume_role_policy_document_text": "{\"Statement\": [{\"Action\": \"sts:AssumeRole\", \"Effect\": \"Allow\", \"Principal\": {\"Service\": \"lambda.amazonaws.com\"}, \"Sid\": \"\"}], \"Version\": \"2012-10-17\"}"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-west-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-3"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-east-1",
+      "opt_in_status": "not-opted-in",
+      "arn": "arn:aws:::123456789012:region/ap-east-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "ec2:flow-log",
+      "flow_log_status": "ACTIVE",
+      "log_format": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}",
+      "log_destination": "arn:aws:s3:::test_bucket",
+      "traffic_type": "ALL",
+      "deliver_logs_status": "SUCCESS",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:flow-log/fl-290d1baa",
+      "log_destination_type": "s3"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "assume_role_policy_document",
+      "version": "2012-10-17"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "cn-north-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/cn-north-1"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    },
+    "T.v_out": {
+      "T.label": "ec2:subnet",
+      "last_ip": 167772415,
+      "cidr_block": "10.0.0.0/24",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:subnet/subnet-20d4e2fd",
+      "first_ip": 167772160
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-2"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "sa-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/sa-east-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "lambda:function",
+      "function_name": "test_lambda_function_1",
+      "runtime": "python3.7",
+      "arn": "arn:aws:lambda:us-east-1:123456789012:function:test_lambda_function_1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "s3:bucket",
+      "name": "test_bucket",
+      "arn": "arn:aws:s3:us-east-1:123456789012:bucket/test_bucket"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "af-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/af-south-1"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "cn-northwest-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/cn-northwest-1"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    },
+    "T.v_out": {
+      "T.label": "ec2:vpc",
+      "cidr_block": "10.0.0.0/16",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:vpc/vpc-b4679527",
+      "is_default": true
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ap-northeast-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-3"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ap-northeast-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-1"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "eu-west-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-3"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-southeast-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-2"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "af-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/af-south-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-northeast-3",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-3"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "transient_resource_link",
+    "T.v_in": {
+      "T.label": "iam:role",
+      "name": "test_role_1",
+      "description": "Test Role 1",
+      "arn": "arn:aws:iam::123456789012:role/test_role_1",
+      "max_session_duration": 3600,
+      "assume_role_policy_document_text": "{\"Statement\": [{\"Action\": \"sts:AssumeRole\", \"Effect\": \"Allow\", \"Principal\": {\"Service\": \"lambda.amazonaws.com\"}, \"Sid\": \"\"}], \"Version\": \"2012-10-17\"}"
+    },
+    "T.v_out": {
+      "T.label": "lambda:function",
+      "function_name": "test_lambda_function_1",
+      "runtime": "python3.7",
+      "arn": "arn:aws:lambda:us-east-1:123456789012:function:test_lambda_function_1"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-east-1"
+    },
+    "T.v_out": {
+      "T.label": "ec2:volume",
+      "availability_zone": "us-east-1a",
+      "volume_type": "gp2",
+      "size": 128,
+      "encrypted": false,
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:volume/vol-ee1444e3"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "ec2:volume",
+      "availability_zone": "us-east-1a",
+      "volume_type": "gp2",
+      "size": 128,
+      "encrypted": false,
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:volume/vol-ee1444e3"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "sa-east-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/sa-east-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "us-west-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/us-west-2"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-south-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "me-south-1",
+      "opt_in_status": "not-opted-in",
+      "arn": "arn:aws:::123456789012:region/me-south-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ap-southeast-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "ca-central-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ca-central-1"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "ec2:subnet",
+      "last_ip": 167772415,
+      "cidr_block": "10.0.0.0/24",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:subnet/subnet-20d4e2fd",
+      "first_ip": 167772160
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "ec2:vpc",
+      "cidr_block": "10.0.0.0/16",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:vpc/vpc-b4679527",
+      "is_default": true
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ca-central-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ca-central-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-south-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-south-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "ec2:vpc",
+      "cidr_block": "10.0.0.0/16",
+      "state": "available",
+      "arn": "arn:aws:ec2:us-east-1:123456789012:vpc/vpc-b4679527",
+      "is_default": true
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-southeast-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-southeast-1"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "eu-west-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-2"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "iam:policy",
+      "policy_id": "AWCHQMVWQZCZDLB1XJO5P",
+      "name": "test_policy_1",
+      "default_version_policy_document_text": "{\"Statement\": [{\"Action\": \"logs:CreateLogGroup\", \"Effect\": \"Allow\", \"Resource\": \"*\"}], \"Version\": \"2012-10-17\"}",
+      "arn": "arn:aws:iam::123456789012:policy/test_policy_1",
+      "default_version_id": "v1"
+    }
+  },
+  {
+    "T.label": "resource_link",
+    "T.v_in": {
+      "T.label": "account",
+      "account_id": "123456789012",
+      "arn": "arn:aws::::account/123456789012"
+    },
+    "T.v_out": {
+      "T.label": "region",
+      "name": "eu-north-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-north-1"
+    }
+  },
+  {
+    "T.label": "identified_resource",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "eu-west-2",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/eu-west-2"
+    },
+    "T.v_out": {
+      "T.label": "metadata",
+      "name": "alti",
+      "version": "2"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "principal",
+      "service": "lambda.amazonaws.com"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "ap-northeast-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/ap-northeast-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "iam:role",
+      "name": "test_role_1",
+      "description": "Test Role 1",
+      "arn": "arn:aws:iam::123456789012:role/test_role_1",
+      "max_session_duration": 3600,
+      "assume_role_policy_document_text": "{\"Statement\": [{\"Action\": \"sts:AssumeRole\", \"Effect\": \"Allow\", \"Principal\": {\"Service\": \"lambda.amazonaws.com\"}, \"Sid\": \"\"}], \"Version\": \"2012-10-17\"}"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "cn-north-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/cn-north-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  },
+  {
+    "T.label": "includes",
+    "T.v_in": {
+      "T.label": "region",
+      "name": "cn-northwest-1",
+      "opt_in_status": "opt-in-not-required",
+      "arn": "arn:aws:::123456789012:region/cn-northwest-1"
+    },
+    "T.v_out": {
+      "T.label": "altimeter_snapshot"
+    }
+  }
+]

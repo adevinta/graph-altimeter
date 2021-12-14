@@ -1,0 +1,8 @@
+# graph_altimeter dependencies.
+gremlinpython==3.4.12
+altimeter==6.3.13
+
+# neptune_python_utils dependencies.
+boto3==1.20.44
+backoff==1.11.1
+aiohttp==3.8.1
