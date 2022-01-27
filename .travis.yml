@@ -1,0 +1,32 @@
+services:
+  - docker
+
+env:
+  global:
+    - LOCAL_IMAGE="graph-altimeter:local"
+    - DEV_IMAGE="purpleteam/graph-altimeter-dev:${TRAVIS_COMMIT}"
+    - RELEASE_IMAGE="adevinta/graph-altimeter:${TRAVIS_TAG}"
+
+before_install: sudo ./script/cisetup
+
+jobs:
+  include:
+    # "test" stage.
+    - stage: "test"
+      script: ./script/test --cov=graph_altimeter
+      name: "test"
+    - script: ./script/lint
+      name: "lint"
+    # "deploy" stage.
+    - stage: "deploy"
+      script: docker build -t "${LOCAL_IMAGE}" .
+      deploy:
+        - provider: script
+          script: ./script/cideploy "${LOCAL_IMAGE}" "${RELEASE_IMAGE}"
+          on:
+            tags: true
+        - provider: script
+          script: ./script/cideploy "${LOCAL_IMAGE}" "${DEV_IMAGE}"
+          on:
+            all_branches: true
+            tags: false
