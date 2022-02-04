@@ -1,6 +1,7 @@
 # graph_altimeter dependencies.
 gremlinpython==3.4.12
-altimeter==6.3.13
+# Altimeter fork.
+git+https://github.com/manelmontilla/altimeter.git@fix-lpg
 
 # neptune_python_utils dependencies.
 boto3==1.20.44
