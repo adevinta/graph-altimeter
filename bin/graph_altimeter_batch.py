@@ -43,18 +43,32 @@ def run_scan():
 
     trampoline_account_role_arn = os.getenv('TRAMPOLINE_ROLE_ARN', None)
 
+    accounts_per_batch = os.getenv("ACCOUNTS_BATCH", None)
+    if accounts_per_batch is None:
+        accounts_per_batch = 1
     accounts = get_aws_accounts(asset_inventory_api_url)
+    batches = len(accounts) // accounts_per_batch
+    if len(accounts) % accounts_per_batch > 0:
+        batches = batches + 1
 
-    config = AltimeterConfig.from_env()
-    scan_config = config.config_dict(
-        accounts,
-        target_account_role,
-        trampoline_account_role_arn,
-    )
-    altimeter_config = AWSConfig.parse_obj(scan_config)
-
-    logger.info('scanning %d accounts', len(accounts))
-    run(altimeter_config)
+    for i in range(0, batches):
+        from_acc = i * accounts_per_batch
+        to_acc = from_acc + accounts_per_batch
+        if to_acc >= len(accounts):
+            to_acc = from_acc + (accounts % accounts_per_batch)
+        batch = accounts[from_acc::to_acc]
+        logger.info(
+            "scanning accounts %i to %i of %i",
+            from_acc, to_acc, len(accounts)
+        )
+        config = AltimeterConfig.from_env()
+        scan_config = config.config_dict(
+            batch,
+            target_account_role,
+            trampoline_account_role_arn,
+        )
+        altimeter_config = AWSConfig.parse_obj(scan_config)
+        run(altimeter_config)
 
 
 def config_root_logger(debug):
