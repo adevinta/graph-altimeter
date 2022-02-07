@@ -9,7 +9,7 @@ from altimeter.core.config import AWSConfig
 
 from graph_altimeter import (
     EnvVarNotSetError,
-    AltimeterError
+    AltimeterError,
 )
 from graph_altimeter.scan import run
 from graph_altimeter.scan.config import AltimeterConfig
@@ -34,8 +34,10 @@ def main():
 def run_scan():
     """Scans the accounts defined in the Asset Inventory using Altimeter."""
     asset_inventory_api_url = os.getenv('ASSET_INVENTORY_API_URL', None)
+    accounts_to_scan = os.getenv("ACCOUNTS_TO_SCAN", None)
     if asset_inventory_api_url is None:
-        raise EnvVarNotSetError('ASSET_INVENTORY_API_URL')
+        if accounts_to_scan is None:
+            raise EnvVarNotSetError('ASSET_INVENTORY_API_URL')
 
     target_account_role = os.getenv('TARGET_ACCOUNT_ROLE', None)
     if target_account_role is None:
@@ -43,23 +45,29 @@ def run_scan():
 
     trampoline_account_role_arn = os.getenv('TRAMPOLINE_ROLE_ARN', None)
 
+    accounts = []
+    if accounts_to_scan is not None:
+        accounts = accounts_to_scan.split(",")
+    else:
+        accounts = get_aws_accounts(asset_inventory_api_url)
     accounts_per_batch = os.getenv("ACCOUNTS_BATCH", None)
     if accounts_per_batch is None:
         accounts_per_batch = 1
-    accounts = get_aws_accounts(asset_inventory_api_url)
-    batches = len(accounts) // accounts_per_batch
-    if len(accounts) % accounts_per_batch > 0:
+    else:
+        accounts_per_batch = int(accounts_per_batch)
+    n_of_accounts = len(accounts)
+    batches = n_of_accounts // accounts_per_batch
+    if n_of_accounts % accounts_per_batch > 0:
         batches = batches + 1
-
     for i in range(0, batches):
         from_acc = i * accounts_per_batch
         to_acc = from_acc + accounts_per_batch
-        if to_acc >= len(accounts):
-            to_acc = from_acc + (accounts % accounts_per_batch)
-        batch = accounts[from_acc::to_acc]
+        if to_acc > n_of_accounts:
+            to_acc = from_acc + (n_of_accounts % accounts_per_batch)
+        batch = accounts[from_acc:to_acc]
         logger.info(
-            "scanning accounts %i to %i of %i",
-            from_acc, to_acc, len(accounts)
+            "scanning accounts %s",
+            str(accounts)
         )
         config = AltimeterConfig.from_env()
         scan_config = config.config_dict(
