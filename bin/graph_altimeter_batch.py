@@ -1,7 +1,6 @@
 """graph_altimeter_batch is a tool used to populate the Altimeter Universe in
 the Security Graph. It is typically launched as a batch job."""
 
-from ast import Not
 import os
 import sys
 import logging
@@ -96,9 +95,6 @@ def config_root_logger(debug):
 
     root_logger.addHandler(logging_handler)
 
-def parse_accounts(accounts_to_scan: str):
-    accounts = accounts_to_scan.split(",")
-    return accounts
 
 if __name__ == '__main__':
     main()
