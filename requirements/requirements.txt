@@ -1,6 +1,7 @@
 # graph_altimeter dependencies.
 gremlinpython==3.4.12
 # Altimeter fork.
+# TODO: revert to upstream once fixes are applied.
 git+https://github.com/manelmontilla/altimeter.git@dev
 
 # neptune_python_utils dependencies.
