@@ -102,14 +102,16 @@ def run(config, resource_specs=None):  # pylint: disable=too-many-locals
 def add_snapshot_vertex(neptune_client, scan_id):
     """Creates a Altimeter snapshot vertex and links it to the proper universe. It
     also ensures that the current ``Universe`` vertex exists. Returns
-    the vertex of the new created vertex."""
+    the vertex of the snapshot."""
     # The vertex_id of the snapshot must follow a concrete naming convention.
     vertex_id = f"altimeter_snapshot_{scan_id}"
     _, conn = neptune_client.connect_to_gremlin()
-    g = traversal(AltimeterTraversalSource).withRemote(conn)
-    g.ensure_universe(CURRENT_UNIVERSE).next()
-    vertex = g.add_snapshot(vertex_id, CURRENT_UNIVERSE).next()
-    conn.close()
+    try:
+        g = traversal(AltimeterTraversalSource).withRemote(conn)
+        g.ensure_universe(CURRENT_UNIVERSE).next()
+        vertex = g.add_snapshot(vertex_id, CURRENT_UNIVERSE).next()
+    finally:
+        conn.close()
     return vertex
 
 
