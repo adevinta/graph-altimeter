@@ -34,10 +34,9 @@ def main():
 def run_scan():
     """Scans the accounts defined in the Asset Inventory using Altimeter."""
     asset_inventory_api_url = os.getenv('ASSET_INVENTORY_API_URL', None)
-    accounts_to_scan = os.getenv("ACCOUNTS_TO_SCAN", None)
-    if asset_inventory_api_url is None:
-        if accounts_to_scan is None:
-            raise EnvVarNotSetError('ASSET_INVENTORY_API_URL')
+    accounts_to_scan = os.getenv("ACCOUNTS", None)
+    if asset_inventory_api_url is None and accounts_to_scan is None:
+        raise EnvVarNotSetError('ASSET_INVENTORY_API_URL')
 
     target_account_role = os.getenv('TARGET_ACCOUNT_ROLE', None)
     if target_account_role is None:
@@ -61,13 +60,11 @@ def run_scan():
         batches = batches + 1
     for i in range(0, batches):
         from_acc = i * accounts_per_batch
-        to_acc = from_acc + accounts_per_batch
-        if to_acc > n_of_accounts:
-            to_acc = from_acc + (n_of_accounts % accounts_per_batch)
+        to_acc = min(from_acc + accounts_per_batch, n_of_accounts)
         batch = accounts[from_acc:to_acc]
         logger.info(
             "scanning accounts %s",
-            str(accounts)
+            batch
         )
         config = AltimeterConfig.from_env()
         scan_config = config.config_dict(
