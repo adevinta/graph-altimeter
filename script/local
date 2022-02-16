@@ -7,12 +7,20 @@ set -e -u
 cd "$(dirname "$0")/.."
 
 # Parse command line arguments.
-if [ $# -ne 1 ]; then
-	echo "usage: $0 envfile" >&2
+if [ $# -lt 1 ]; then
+	echo "usage: $0 envfile [notebooks_path]" >&2
 	exit 2
 fi
+
 export ENV_FILE=$1
 echo "Env file: ${ENV_FILE}"
+
+export NOTEBOOKS="./notebooks"
+
+if [ $# -ge 2 ]; then
+	export NOTEBOOKS=$2
+fi
+echo "Notebooks dir: ${NOTEBOOKS}"
 
 # Run the docker-compose local environment.
 DOCKER_COMPOSE_PROJECT='graph-altimeter-local'
