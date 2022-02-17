@@ -24,6 +24,7 @@ from altimeter.core.neptune.client import (
 
 from graph_altimeter import InvalidRoleArnError, CURRENT_UNIVERSE
 from graph_altimeter.dsl import AltimeterTraversalSource
+from graph_altimeter.scan.neptune_client import GraphAltimeterNeptuneClient
 
 
 logger = logging.getLogger(__name__)
@@ -88,32 +89,30 @@ def run(config, resource_specs=None):  # pylint: disable=too-many-locals
         scanned_accounts,
         not_scanned_accounts,
     )
+    neptune_client = GraphAltimeterNeptuneClient(endpoint)
 
+    logger.debug('scan %s: writing results to Gremlin DB', scan_id)
     graph_set = AltimeterUniverseGraph(graph_set)
-    graph, snapshot_vertex_id = graph_set.to_gremlin_lpg(scan_id)
-
-    neptune_client = AltimeterNeptuneClient(
-        max_age_min=1440,
-        neptune_endpoint=endpoint,
-    )
-
-    # TODO: The following two operations are not transactional. This should be
-    # reviewed.
-    logger.debug('scan %s: writing results in Gremlin DB', scan_id)
-
-    neptune_client.write_to_neptune_lpg(graph, scan_id)
-    link_snapshot_with_universe(neptune_client, snapshot_vertex_id)
-    logger.debug('scan %s: finished writting results in Gremlin DB', scan_id)
+    graph = graph_set.to_gremlin_lpg(scan_id)
+    snapshot_vertex = add_snapshot_vertex(neptune_client, scan_id)
+    neptune_client.write_to_neptune_lpg(graph, scan_id, snapshot_vertex)
+    logger.debug('scan %s: finished writting results to Gremlin DB', scan_id)
 
 
-def link_snapshot_with_universe(neptune_client, vertex_id):
-    """Links the current universe to a vertex given its vertex_id. It also
-    ensures that the current ``Universe`` vertex exists."""
+def add_snapshot_vertex(neptune_client, scan_id):
+    """Creates a Altimeter snapshot vertex and links it to the proper universe. It
+    also ensures that the current ``Universe`` vertex exists. Returns
+    the vertex of the snapshot."""
+    # The vertex_id of the snapshot must follow a concrete naming convention.
+    vertex_id = f"altimeter_snapshot_{scan_id}"
     _, conn = neptune_client.connect_to_gremlin()
-    g = traversal(AltimeterTraversalSource).withRemote(conn)
-    g.ensure_universe(CURRENT_UNIVERSE).next()
-    g.link_to_universe(CURRENT_UNIVERSE, vertex_id).next()
-    conn.close()
+    try:
+        g = traversal(AltimeterTraversalSource).withRemote(conn)
+        g.ensure_universe(CURRENT_UNIVERSE).next()
+        vertex = g.add_snapshot(vertex_id, CURRENT_UNIVERSE).next()
+    finally:
+        conn.close()
+    return vertex
 
 
 def parse_role_arn(arn):
@@ -153,35 +152,7 @@ class AltimeterUniverseGraph:
         # Fix orphan edges in the graph dictionary.
         graph_dict = self.graph.to_neptune_lpg(scan_id)
         _fix_orphan_edges(graph_dict, scan_id)
-
-        # Add a vertex representing the snaphot for this scan and create the
-        # edges that link it with all the vertices of the scan.
-        snapshot_vertex = {
-            "~id": "altimeter_snapshot",
-            "~label": "altimeter_snapshot",
-            "timestamp": datetime.now()
-        }
-
-        vertices = graph_dict["vertices"]
-        edges = graph_dict["edges"]
-
-        # Add an edge connecting each existing vertex in the graph with the
-        # snapshot_vertex.
-        for v in vertices:
-            edges.append(
-                {
-                    "~id": str(uuid.uuid1()),
-                    "~label": "includes",
-                    "~from": "altimeter_snapshot",
-                    "~to": v["~id"],
-                }
-            )
-
-        vertices.append(snapshot_vertex)
-        graph_dict = {"vertices": vertices, "edges": edges}
-
-        # Return the graph dictionary and the id of the new snapshot vertex.
-        return (graph_dict, f"altimeter_snapshot_{scan_id}")
+        return graph_dict
 
 
 def _create_vertex(v_id, scan_id):
