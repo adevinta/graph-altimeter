@@ -100,6 +100,7 @@ def run(config, resource_specs=None):  # pylint: disable=too-many-locals
     # TODO: The following two operations are not transactional. This should be
     # reviewed.
     logger.debug('scan %s: writing results in Gremlin DB', scan_id)
+
     neptune_client.write_to_neptune_lpg(graph, scan_id)
     link_snapshot_with_universe(neptune_client, snapshot_vertex_id)
     logger.debug('scan %s: finished writting results in Gremlin DB', scan_id)
@@ -169,7 +170,7 @@ class AltimeterUniverseGraph:
         for v in vertices:
             edges.append(
                 {
-                    "~id": uuid.uuid1(),
+                    "~id": str(uuid.uuid1()),
                     "~label": "includes",
                     "~from": "altimeter_snapshot",
                     "~to": v["~id"],
@@ -190,7 +191,7 @@ def _create_vertex(v_id, scan_id):
         "~id": v_id,
         "~label": label,
         "scan_id": scan_id,
-        "arn": v_id,
+        "arn": str(v_id),
     }
     return new_vertex
 
