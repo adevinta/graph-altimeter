@@ -6,21 +6,25 @@ set -e -u
 # Set working directory to the root of the repo.
 cd "$(dirname "$0")/.."
 
-# Parse command line arguments.
-if [ $# -lt 1 ]; then
+ENV_FILE=""
+NOTEBOOKS="./notebooks"
+case $# in
+1)
+	ENV_FILE=$1
+	;;
+2)
+	ENV_FILE=$1
+	NOTEBOOKS=$2
+	;;
+*)
 	echo "usage: $0 envfile [notebooks_path]" >&2
 	exit 2
-fi
+	;;
+esac
+export ENV_FILE
+export NOTEBOOKS
 
-export ENV_FILE=$1
-echo "Env file: ${ENV_FILE}"
-
-export NOTEBOOKS="./notebooks"
-
-if [ $# -ge 2 ]; then
-	export NOTEBOOKS=$2
-fi
-echo "Notebooks dir: ${NOTEBOOKS}"
+echo "using notebooks dir: ${NOTEBOOKS}"
 
 # Run the docker-compose local environment.
 DOCKER_COMPOSE_PROJECT='graph-altimeter-local'

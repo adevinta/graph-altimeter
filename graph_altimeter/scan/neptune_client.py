@@ -27,7 +27,8 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
         neptune_endpoint: NeptuneEndpoint object for this client"""
 
     def __init__(self, endpoint: NeptuneEndpoint):
-        # We the max_age_min is not used lpg's graphs.
+        # The first parameter in the constructor of the base class is not used
+        # for lpg's graphs.
         super().__init__(0, endpoint)
         self.logger = logger
 
@@ -38,9 +39,11 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
         if "vertices" in graph and "edges" in graph \
                 and len(graph["vertices"]) > 0:
             g, conn = self.connect_to_gremlin()
-            self.__write_vertices(g, graph["vertices"], scan_id, vertex_id)
-            self.__write_edges(g, graph["edges"], scan_id)
-            conn.close()
+            try:
+                self.__write_vertices(g, graph["vertices"], scan_id, vertex_id)
+                self.__write_edges(g, graph["edges"], scan_id)
+            finally:
+                conn.close()
         else:
             raise NeptuneNoGraphsFoundException
 
@@ -48,7 +51,7 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
     def __write_vertices(self, g, vertices, scan_id, link_from_id):
         """Writes the provided vertices dictionary to a labeled graph
         ensuring each new vertex is linked to the vertex identified by the
-        link_from_id param"""
+        link_from_id param."""
         cnt = 0
         t = g
         for r in vertices:

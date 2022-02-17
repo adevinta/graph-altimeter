@@ -68,7 +68,7 @@ services:
     ports:
       - "127.0.0.1:8889:8888"
     volumes:
-      - "${NOTEBOOKS:-./notebooks}:/notebooks"
+      - "./notebooks:/notebooks"
     depends_on:
       gremlin-server:
         condition: service_healthy
