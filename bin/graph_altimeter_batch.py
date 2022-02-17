@@ -9,7 +9,7 @@ from altimeter.core.config import AWSConfig
 
 from graph_altimeter import (
     EnvVarNotSetError,
-    AltimeterError
+    AltimeterError,
 )
 from graph_altimeter.scan import run
 from graph_altimeter.scan.config import AltimeterConfig
@@ -34,7 +34,8 @@ def main():
 def run_scan():
     """Scans the accounts defined in the Asset Inventory using Altimeter."""
     asset_inventory_api_url = os.getenv('ASSET_INVENTORY_API_URL', None)
-    if asset_inventory_api_url is None:
+    accounts_to_scan = os.getenv("ACCOUNTS", None)
+    if asset_inventory_api_url is None and accounts_to_scan is None:
         raise EnvVarNotSetError('ASSET_INVENTORY_API_URL')
 
     target_account_role = os.getenv('TARGET_ACCOUNT_ROLE', None)
@@ -43,18 +44,36 @@ def run_scan():
 
     trampoline_account_role_arn = os.getenv('TRAMPOLINE_ROLE_ARN', None)
 
-    accounts = get_aws_accounts(asset_inventory_api_url)
-
-    config = AltimeterConfig.from_env()
-    scan_config = config.config_dict(
-        accounts,
-        target_account_role,
-        trampoline_account_role_arn,
-    )
-    altimeter_config = AWSConfig.parse_obj(scan_config)
-
-    logger.info('scanning %d accounts', len(accounts))
-    run(altimeter_config)
+    accounts = []
+    if accounts_to_scan is not None:
+        accounts = accounts_to_scan.split(",")
+    else:
+        accounts = get_aws_accounts(asset_inventory_api_url)
+    accounts_per_batch = os.getenv("ACCOUNTS_BATCH", None)
+    if accounts_per_batch is None:
+        accounts_per_batch = 1
+    else:
+        accounts_per_batch = int(accounts_per_batch)
+    n_of_accounts = len(accounts)
+    batches = n_of_accounts // accounts_per_batch
+    if n_of_accounts % accounts_per_batch > 0:
+        batches = batches + 1
+    for i in range(0, batches):
+        from_acc = i * accounts_per_batch
+        to_acc = min(from_acc + accounts_per_batch, n_of_accounts)
+        batch = accounts[from_acc:to_acc]
+        logger.info(
+            "scanning accounts %s",
+            batch
+        )
+        config = AltimeterConfig.from_env()
+        scan_config = config.config_dict(
+            batch,
+            target_account_role,
+            trampoline_account_role_arn,
+        )
+        altimeter_config = AWSConfig.parse_obj(scan_config)
+        run(altimeter_config)
 
 
 def config_root_logger(debug):
