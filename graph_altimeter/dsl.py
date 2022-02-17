@@ -1,5 +1,6 @@
 """Gremlin DSL for the Security Graph Altimeter Universe."""
 
+from datetime import datetime
 import uuid
 
 from gremlin_python.process.graph_traversal import (
@@ -150,4 +151,13 @@ class AltimeterTraversalSource(GraphTraversalSource):
         """Links a given ``Universe`` to the specified vertex"""
         return self\
             .V(vid) \
+            .link_to_universe(universe)
+
+    def add_snapshot(self, vid, universe):
+        """Creates a new  Snapshot vertex with the given vid, links it to the
+        given universe and returns the newly created vertex."""
+        return self \
+            .addV('altimeter_snapshot') \
+            .property(T.id, vid) \
+            .property(Cardinality.single, 'timestamp', datetime.now()) \
             .link_to_universe(universe)

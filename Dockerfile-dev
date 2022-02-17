@@ -10,7 +10,7 @@ RUN git clone --depth 1 --branch amazon-neptune-tools-1.4 \
 # Stage for the graph-altimeter dev image.
 FROM python:3.9.6-alpine
 
-RUN apk add gcc musl-dev libffi-dev
+RUN apk add gcc musl-dev libffi-dev git
 
 COPY requirements/requirements.txt requirements/requirements-dev.txt /tmp/
 RUN pip install -r /tmp/requirements.txt -r /tmp/requirements-dev.txt && \
