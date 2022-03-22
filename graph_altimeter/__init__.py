@@ -29,7 +29,7 @@ class EnvVarNotSetError(AltimeterError):
 
 
 class InvalidRoleArnError(Exception):
-    """It is returned when an arn is invalid."""
+    """It is returned when a role ARN is invalid."""
 
     def __init__(self, arn=None):
         msg = 'invalid role arn'
@@ -39,3 +39,28 @@ class InvalidRoleArnError(Exception):
         super().__init__(msg)
 
         self.arn = arn
+
+
+class InvalidArnError(Exception):
+    """It is returned when an ARN is invalid."""
+
+    def __init__(self, arn=None):
+        msg = 'invalid arn'
+        if arn is not None:
+            msg = f'invalid arn: {arn}'
+
+        super().__init__(msg)
+
+        self.arn = arn
+
+
+class InvalidArnPattern(Exception):
+    """It is returned when an ARN pattern is invalid."""
+    def __init__(self, pattern=None):
+        msg = 'invalid arn pattern'
+        if pattern is not None:
+            msg = f'invalid arn pattern: {pattern}'
+
+        super().__init__(msg)
+
+        self.pattern = pattern
