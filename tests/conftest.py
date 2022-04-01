@@ -142,6 +142,11 @@ def aws_resources(aws_credentials):
                     "Action": "logs:CreateLogGroup",
                     "Resource": "*",
                 },
+                {
+                    "Effect": "Allow",
+                    "Action": "s3:GetObject",
+                    "Resource": f"arn:aws:s3:::{bucket_1_name}"
+                }
             ],
         },
     )

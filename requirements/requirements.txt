@@ -1,5 +1,6 @@
 # graph_altimeter dependencies.
 gremlinpython==3.4.12
+policyuniverse==1.4.0.20220110
 # Altimeter fork.
 # TODO: revert to upstream once fixes are applied.
 git+https://github.com/manelmontilla/altimeter.git@dev
@@ -7,4 +8,4 @@ git+https://github.com/manelmontilla/altimeter.git@dev
 # neptune_python_utils dependencies.
 boto3==1.20.44
 backoff==1.11.1
-aiohttp==3.8.1
+aiohttp==3.8.0

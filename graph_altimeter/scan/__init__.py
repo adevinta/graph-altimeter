@@ -25,6 +25,7 @@ from altimeter.core.neptune.client import (
 from graph_altimeter import InvalidRoleArnError, CURRENT_UNIVERSE
 from graph_altimeter.dsl import AltimeterTraversalSource
 from graph_altimeter.scan.neptune_client import GraphAltimeterNeptuneClient
+from graph_altimeter.scan.iam import expand_iam_policies
 
 
 logger = logging.getLogger(__name__)
@@ -136,9 +137,8 @@ def generate_scan_id():
 
 class AltimeterUniverseGraph:
     """This class expands the information of an Altimeter GraphSet that
-    contains the result of a scan, so it can be stored as a snaphost of a
-    concrete version of the Altimeter Universe in a Gremlin compatible graph
-    DB."""
+    contains the result of a scan, so it matches the expected schema of
+    the Altimeter Universe."""
 
     def __init__(self, graph):
         self.graph = graph
@@ -149,8 +149,8 @@ class AltimeterUniverseGraph:
         the ``AltimeterNeptuneClient.write_to_neptune_lpg`` method to store the
         graph in a Gremlin compatible DB. Returns the generated dictionary and
         the id of the snapshot vertex."""
-        # Fix orphan edges in the graph dictionary.
         graph_dict = self.graph.to_neptune_lpg(scan_id)
+        expand_iam_policies(graph_dict)
         _fix_orphan_edges(graph_dict, scan_id)
         return graph_dict
 
