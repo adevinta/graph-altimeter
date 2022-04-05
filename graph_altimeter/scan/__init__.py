@@ -155,14 +155,16 @@ class AltimeterUniverseGraph:
         return graph_dict
 
 
-def _create_vertex(v_id, scan_id):
-    """Returns an Altimeter vertex given a vertex ID and a scan ID."""
+def _create_vertex(v_id, scan_id, account_id):
+    """Returns an Altimeter vertex given a vertex ID, a scan ID and an account
+    id."""
     label = AltimeterNeptuneClient.parse_arn(v_id)["resource"]
     new_vertex = {
         "~id": v_id,
         "~label": label,
         "scan_id": scan_id,
         "arn": str(v_id),
+        "account_id": account_id,
     }
     return new_vertex
 
@@ -172,17 +174,25 @@ def _fix_orphan_edges(graph_dict, scan_id):
     vertices = graph_dict["vertices"]
     edges = graph_dict["edges"]
 
-    existing_vertices = {v["~id"] for v in vertices}
+    existing_vertices = {v["~id"]: v for v in vertices}
     non_existing_vertices = {}
     for e in edges:
         from_vid = e["~from"]
         to_vid = e["~to"]
+        # Skip error vertices.
         if ((from_vid not in existing_vertices) and
            (from_vid not in non_existing_vertices)):
-            non_existing_vertices[from_vid] = _create_vertex(from_vid, scan_id)
+            if existing_vertices[to_vid]["~label"] == "error":
+                account_id = ""
+            else:
+                account_id = existing_vertices[to_vid]["account_id"]
+            non_existing_vertices[from_vid] = \
+                _create_vertex(from_vid, scan_id, account_id)
         if ((to_vid not in existing_vertices) and
            (to_vid not in non_existing_vertices)):
-            non_existing_vertices[to_vid] = _create_vertex(to_vid, scan_id)
+            account_id = existing_vertices[from_vid]["account_id"]
+            non_existing_vertices[to_vid] = \
+                _create_vertex(to_vid, scan_id, account_id)
 
     vertices = vertices + list(non_existing_vertices.values())
     graph_dict["vertices"] = vertices
