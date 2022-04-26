@@ -24,7 +24,7 @@ from graph_altimeter.scan.config import AltimeterConfig
 from graph_altimeter.scan import run
 
 
-def test_run(g, opt_write_golden_file, aws_resources):
+def test_run(g, opt_write_testdata, aws_resources):
     """Tests running an Altimeter Scan."""
     # pylint: disable=too-many-locals
 
@@ -84,7 +84,7 @@ def test_run(g, opt_write_golden_file, aws_resources):
         edges = g.E().elementMap().toList()
         graph = create_graph(vertices, edges)
 
-        if opt_write_golden_file:
+        if opt_write_testdata:
             with open(TESTDATA_DIR / "graph.json", "wb") as graph_file:
                 graph_file.write(json.dumps(graph).encode('utf-8'))
         else:

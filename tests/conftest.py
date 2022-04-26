@@ -47,17 +47,17 @@ def get_auth_mode():
 def pytest_addoption(parser):
     """Adds custom options for the test cases."""
     parser.addoption(
-        "--write-golden-file",
+        "--write-testdata",
         action="store_true",
         default=False,
-        help="update golden file",
+        help="update testdata",
     )
 
 
 @pytest.fixture
-def opt_write_golden_file(request):
-    """Returns the value of the flag --write-golden-file."""
-    return request.config.getoption("--write-golden-file")
+def opt_write_testdata(request):
+    """Returns the value of the flag --write-testdata."""
+    return request.config.getoption("--write-testdata")
 
 
 @pytest.fixture(scope='session', autouse=True)

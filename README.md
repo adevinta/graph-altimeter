@@ -20,12 +20,12 @@ AWS assets in these accounts.
 
 ## Test suite
 
-### Update golden files
+### Update testdata
 
 The golden files located at `/tests/testdata` can be updated with:
 
 ```
-./script/test --write-golden-file
+./script/test --write-testdata
 ```
 
 It is also possible to update a specific golden file by specifying the name of
@@ -33,7 +33,7 @@ the corresponding test case. For instance, in the case of
 `/tests/testdata/graph.json`:
 
 ```
-./script/test --write-golden-file tests/test_scan.py::test_run
+./script/test --write-testdata tests/test_scan.py::test_run
 ```
 
 
