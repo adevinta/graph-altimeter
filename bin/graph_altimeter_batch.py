@@ -79,9 +79,9 @@ def run_scan():
 def config_root_logger(debug):
     """Configures the root logger. It sets the logging level to ``DEBUG`` if
     the param ``debug`` is true. Otherwise, the logging level is set to
-    ``INFO``."""
+    ``WARNING``."""
     root_logger = logging.getLogger()
-    log_level = logging.DEBUG if debug else logging.INFO
+    log_level = logging.DEBUG if debug else logging.WARNING
     root_logger.setLevel(log_level)
 
     logging_handler = logging.StreamHandler(stream=sys.stderr)
