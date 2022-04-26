@@ -44,6 +44,22 @@ def get_auth_mode():
     return os.getenv('GREMLIN_AUTH_MODE', 'none')
 
 
+def pytest_addoption(parser):
+    """Adds custom options for the test cases."""
+    parser.addoption(
+        "--write-golden-file",
+        action="store_true",
+        default=False,
+        help="update golden file",
+    )
+
+
+@pytest.fixture
+def opt_write_golden_file(request):
+    """Returns the value of the flag --write-golden-file."""
+    return request.config.getoption("--write-golden-file")
+
+
 @pytest.fixture(scope='session', autouse=True)
 def init_session(aws_resources):
     """Initializes session fixtures in a given order."""
@@ -192,7 +208,6 @@ def aws_resources(aws_credentials):
         region_name=resource_region_name,
     )
 
-    # TODO: document how to generate a golden file.
     graph = None
     with open(TESTDATA_DIR / "graph.json", "rb") as graph_file:
         graph = json.loads(graph_file.read())
