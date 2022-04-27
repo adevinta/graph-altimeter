@@ -18,6 +18,24 @@ The Altimeter universe takes the AWS accounts stored in the [Security Graph -
 Asset Inventory] and uses Tableau [Altimeter] to gather information about the
 AWS assets in these accounts.
 
+## Test suite
+
+### Update testdata
+
+The golden files located at `/tests/testdata` can be updated with:
+
+```
+./script/test --write-testdata
+```
+
+It is also possible to update a specific golden file by specifying the name of
+the corresponding test case. For instance, in the case of
+`/tests/testdata/graph.json`:
+
+```
+./script/test --write-testdata tests/test_scan.py::test_run
+```
+
 
 [Altimeter]: https://github.com/tableau/altimeter
 [Security Graph - Asset Inventory]: https://github.com/adevinta/graph-asset-inventory-api
