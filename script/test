@@ -13,4 +13,6 @@ echo "pytest flags: '${PYTEST_FLAGS}'"
 # Run the docker-compose test environment.
 DOCKER_COMPOSE_PROJECT='graph-altimeter-test'
 docker-compose -p "${DOCKER_COMPOSE_PROJECT}" build graph-altimeter-test
-docker-compose -p "${DOCKER_COMPOSE_PROJECT}" run graph-altimeter-test
+docker-compose -p "${DOCKER_COMPOSE_PROJECT}" run \
+	-u "$(id -u):$(id -g)" \
+	graph-altimeter-test

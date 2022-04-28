@@ -1,6 +1,7 @@
 """Tests for the ``universe`` module."""
 
 import tempfile
+import json
 
 from altimeter.aws.resource.awslambda.function import (
     LambdaFunctionResourceSpec
@@ -18,12 +19,15 @@ from helpers import (
     compare_graphs,
 )
 
+from conftest import TESTDATA_DIR
 from graph_altimeter.scan.config import AltimeterConfig
 from graph_altimeter.scan import run
 
 
-def test_run(g, aws_resources):
+def test_run(g, opt_write_testdata, aws_resources):
     """Tests running an Altimeter Scan."""
+    # pylint: disable=too-many-locals
+
     account_id = aws_resources["account"]
     target_account_role = aws_resources["target_account_role"]
     expected_graph = aws_resources["graph"]
@@ -80,4 +84,8 @@ def test_run(g, aws_resources):
         edges = g.E().elementMap().toList()
         graph = create_graph(vertices, edges)
 
-        compare_graphs(graph, expected_graph)
+        if opt_write_testdata:
+            with open(TESTDATA_DIR / "graph.json", "wb") as graph_file:
+                graph_file.write(json.dumps(graph).encode('utf-8'))
+        else:
+            compare_graphs(graph, expected_graph)
