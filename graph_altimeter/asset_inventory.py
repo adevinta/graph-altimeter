@@ -3,19 +3,13 @@
 import urllib
 import urllib.parse
 import json
-from datetime import (
-    datetime,
-    timezone,
-)
 
 
 def get_aws_accounts(asset_inventory_api_url):
     """Gets the non-expired AWS accounts stored in the Asset Inventory given
     its base url."""
-    valid_at = datetime.now(timezone.utc).isoformat()
-    valid_at_q = urllib.parse.quote_plus(valid_at)
     assets_url = f"{asset_inventory_api_url}/assets?" \
-                 f"asset_type=AWSAccount&valid_at={valid_at_q}"
+                 f"asset_type=AWSAccount"
     request = urllib.request.Request(url=assets_url, method="GET")
 
     accounts_info = []
