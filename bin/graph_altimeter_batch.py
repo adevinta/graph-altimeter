@@ -49,26 +49,12 @@ def run_scan():
         accounts = accounts_to_scan.split(",")
     else:
         accounts = get_aws_accounts(asset_inventory_api_url)
-    accounts_per_batch = os.getenv("ACCOUNTS_BATCH", None)
-    if accounts_per_batch is None:
-        accounts_per_batch = 1
-    else:
-        accounts_per_batch = int(accounts_per_batch)
-    n_of_accounts = len(accounts)
-    batches = n_of_accounts // accounts_per_batch
-    if n_of_accounts % accounts_per_batch > 0:
-        batches = batches + 1
-    for i in range(0, batches):
-        from_acc = i * accounts_per_batch
-        to_acc = min(from_acc + accounts_per_batch, n_of_accounts)
-        batch = accounts[from_acc:to_acc]
-        logger.info(
-            "scanning accounts %s",
-            batch
-        )
+
+    for account_id in accounts:
+        logger.info("scanning account %s", account_id)
         config = AltimeterConfig.from_env()
         scan_config = config.config_dict(
-            batch,
+            account_id,
             target_account_role,
             trampoline_account_role_arn,
         )
