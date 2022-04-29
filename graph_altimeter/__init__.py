@@ -54,7 +54,7 @@ class InvalidArnError(Exception):
         self.arn = arn
 
 
-class InvalidArnPattern(Exception):
+class InvalidArnPatternError(Exception):
     """It is returned when an ARN pattern is invalid."""
     def __init__(self, pattern=None):
         msg = 'invalid arn pattern'
@@ -64,3 +64,7 @@ class InvalidArnPattern(Exception):
         super().__init__(msg)
 
         self.pattern = pattern
+
+
+class EmptyActionsError(Exception):
+    """The statement in the IAM policy does not contain any action."""
