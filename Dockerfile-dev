@@ -12,9 +12,8 @@ FROM python:3.9.6-alpine
 
 RUN apk add gcc musl-dev libffi-dev git
 
-COPY requirements/requirements.txt requirements/requirements-dev.txt /tmp/
-RUN pip install -r /tmp/requirements.txt -r /tmp/requirements-dev.txt && \
-	rm -f /tmp/requirements.txt /tmp/requirements-dev.txt
+COPY requirements/requirements-dev.txt /tmp/
+RUN pip install -r /tmp/requirements-dev.txt && rm -f /tmp/requirements-dev.txt
 
 RUN mkdir -p /app
 WORKDIR /app
