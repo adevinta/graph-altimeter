@@ -24,6 +24,29 @@ services:
     entrypoint: ["python"]
     command: ["bin/graph_altimeter_batch.py"]
 
+  graph-altimeter-local-altimeter:
+    build:
+      context: .
+      dockerfile: Dockerfile-altimeter
+    env_file: "${ENV_FILE:-env/local.env}"
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN
+      - AWS_REGION
+      - AWS_DEFAULT_REGION
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      gremlin-server:
+        condition: service_healthy
+      graph-notebook-local-altimeter:
+        condition: service_started
+    entrypoint: ["python"]
+    command: ["bin/graph_altimeter_batch.py"]
+
   graph-altimeter-test:
     build:
       context: .
@@ -57,6 +80,16 @@ services:
     image: adevinta/graph-notebook-docker:v1.0.0
     ports:
       - "127.0.0.1:8888:8888"
+    volumes:
+      - "${NOTEBOOKS:-./notebooks}:/notebooks"
+    depends_on:
+      gremlin-server:
+        condition: service_healthy
+
+  graph-notebook-local-altimeter:
+    image: adevinta/graph-notebook-docker:v1.0.0
+    ports:
+      - "127.0.0.1:8890:8888"
     volumes:
       - "${NOTEBOOKS:-./notebooks}:/notebooks"
     depends_on:

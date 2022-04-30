@@ -1,0 +1,17 @@
+# graph_altimeter dependencies.
+gremlinpython==3.4.12
+policyuniverse==1.4.0.20220110
+
+# neptune_python_utils dependencies.
+boto3==1.20.44
+backoff==1.11.1
+aiohttp==3.8.0
+
+# Test suite dependencies.
+pytest==6.2.4
+pytest-cov==2.12.1
+moto[all]==2.3.2
+
+# Linters.
+pylint==2.9.3
+flake8==3.9.2
