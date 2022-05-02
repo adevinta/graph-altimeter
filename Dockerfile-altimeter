@@ -12,8 +12,12 @@ FROM python:3.9.6-alpine
 
 RUN apk add gcc musl-dev libffi-dev git
 
-COPY requirements/requirements-dev.txt /tmp/
-RUN pip install -r /tmp/requirements-dev.txt && rm -f /tmp/requirements-dev.txt
+COPY requirements/requirements-altimeter.txt /tmp/
+RUN pip install -r /tmp/requirements-altimeter.txt && \
+    rm -f /tmp/requirements-altimeter.txt
+
+COPY extern/altimeter/requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt && rm -f /tmp/requirements.txt
 
 RUN mkdir -p /app
 WORKDIR /app
@@ -23,4 +27,4 @@ COPY --from=builder \
 	/amazon-neptune-tools/neptune-python-utils/neptune_python_utils \
 	/deps/neptune_python_utils
 
-ENV PYTHONPATH="/app:/deps"
+ENV PYTHONPATH="/app:/app/extern/altimeter:/deps"

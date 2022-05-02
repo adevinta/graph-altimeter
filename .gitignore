@@ -13,3 +13,6 @@ htmlcov/
 
 # Python
 __pycache__
+
+# External dependencies.
+/extern/

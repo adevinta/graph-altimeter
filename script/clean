@@ -7,7 +7,12 @@ set -e -u
 cd "$(dirname $0)/.."
 
 # Clean up all docker-compose projects.
-PROJECTS=('graph-altimeter-local' 'graph-altimeter-test' 'graph-altimeter-lint')
+PROJECTS=(
+	'graph-altimeter-local'
+	'graph-altimeter-local-altimeter'
+	'graph-altimeter-test'
+	'graph-altimeter-lint'
+)
 for project in ${PROJECTS[@]}; do
 	echo "Cleaning up ${project}" >&2
 	docker-compose -p "${project}" rm -s -f
