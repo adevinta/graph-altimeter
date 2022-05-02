@@ -96,10 +96,10 @@ class AltimeterConfig:
         target_account_role,
         trampoline_account_role_arn=None,
     ):
-        """This function returns a dictionary suitable to run an Altimeter Scan by
-        using the base dictionary stored in the instance, a ``target_account_id``
-        to scan, the ``target_account_role`` to be assumed in
-        that account and an optional trampoline account."""
+        """This function returns a dictionary suitable to run an Altimeter Scan
+        by using the base dictionary stored in the instance, a
+        ``target_account_id`` to scan, the ``target_account_role`` to be
+        assumed in that account and an optional trampoline account."""
         config_dict = copy.deepcopy(self.__config_dict)
         config_dict["accessor"] = account_accessor_dict(
             target_account_role,
