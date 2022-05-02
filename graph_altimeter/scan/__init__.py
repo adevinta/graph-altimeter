@@ -29,7 +29,8 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
-def run(config, resource_specs=None):  # pylint: disable=too-many-locals
+def run(config, account_id, resource_specs=None):
+    # pylint: disable=too-many-locals
     """Given an Altimeter ``config``, runs an Altimeter scan and stores the
     result in a Gremlin compatible DB following the Altimeter Universe
     schema."""
@@ -91,7 +92,7 @@ def run(config, resource_specs=None):  # pylint: disable=too-many-locals
 
     logger.debug('scan %s: writing results to Gremlin DB', scan_id)
     graph = graph_set.to_neptune_lpg(scan_id)
-    postprocess(graph, scan_id)
+    postprocess(graph, scan_id, account_id)
     snapshot_vertex = add_snapshot_vertex(neptune_client, scan_id)
     neptune_client.write_to_neptune_lpg(graph, scan_id, snapshot_vertex)
     logger.debug('scan %s: finished writting results to Gremlin DB', scan_id)
