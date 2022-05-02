@@ -22,7 +22,7 @@ def postprocess(graph_dict, scan_id, account_id):
 
 def _add_account_id(graph_dict, account_id):
     """Adds the property account_id to all the vertices in the graph
-    dictionary"""
+    dictionary."""
     vertices = graph_dict["vertices"]
     for v in vertices:
         v["account_id"] = account_id
