@@ -36,6 +36,25 @@ the corresponding test case. For instance, in the case of
 ./script/test --write-testdata tests/test_scan.py::test_run
 ```
 
+## Python dependencies
+
+Both direct and transitive dependencies must be pinned. In order to do that we
+use [pip-compile]. After modifying the file `requirements.in`, you must run the
+following command to update `requirements.txt`:
+
+```
+script/pip-compile requirements/requirements.in
+```
+
+## Contributing
+
+**This project is in an early stage, we are not accepting external
+contributions yet.**
+
+To contribute, please read the contribution guidelines in [CONTRIBUTING.md].
+
 
 [Altimeter]: https://github.com/tableau/altimeter
 [Security Graph - Asset Inventory]: https://github.com/adevinta/graph-asset-inventory-api
+[pip-compile]: https://pypi.org/project/pip-tools/
+[CONTRIBUTING.md]: CONTRIBUTING.md

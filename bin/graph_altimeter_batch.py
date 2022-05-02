@@ -79,10 +79,16 @@ def run_scan():
 def config_root_logger(debug):
     """Configures the root logger. It sets the logging level to ``DEBUG`` if
     the param ``debug`` is true. Otherwise, the logging level is set to
-    ``WARNING``."""
+    ``INFO``."""
     root_logger = logging.getLogger()
-    log_level = logging.DEBUG if debug else logging.WARNING
-    root_logger.setLevel(log_level)
+
+    if debug:
+        root_logger.setLevel(logging.DEBUG)
+    else:
+        root_logger.setLevel(logging.INFO)
+        # Altimeter's INFO level is too verbose. So we set it to WARNING on
+        # non-debug mode.
+        logging.getLogger('altimeter').setLevel(logging.WARNING)
 
     logging_handler = logging.StreamHandler(stream=sys.stderr)
     formatter = logging.Formatter(
