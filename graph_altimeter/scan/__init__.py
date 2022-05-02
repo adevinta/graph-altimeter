@@ -17,15 +17,12 @@ from altimeter.aws.scan.scan import run_scan
 from altimeter.aws.scan.settings import ALL_RESOURCE_SPEC_CLASSES
 from altimeter.core.artifact_io.reader import ArtifactReader
 from altimeter.core.artifact_io.writer import ArtifactWriter
-from altimeter.core.neptune.client import (
-    AltimeterNeptuneClient,
-    NeptuneEndpoint
-)
+from altimeter.core.neptune.client import NeptuneEndpoint
 
 from graph_altimeter import InvalidRoleArnError, CURRENT_UNIVERSE
 from graph_altimeter.dsl import AltimeterTraversalSource
 from graph_altimeter.scan.neptune_client import GraphAltimeterNeptuneClient
-from graph_altimeter.scan.iam import expand_iam_policies
+from graph_altimeter.scan.postprocess import postprocess
 
 
 logger = logging.getLogger(__name__)
@@ -93,8 +90,8 @@ def run(config, resource_specs=None):  # pylint: disable=too-many-locals
     neptune_client = GraphAltimeterNeptuneClient(endpoint)
 
     logger.debug('scan %s: writing results to Gremlin DB', scan_id)
-    graph_set = AltimeterUniverseGraph(graph_set)
-    graph = graph_set.to_gremlin_lpg(scan_id)
+    graph = graph_set.to_neptune_lpg(scan_id)
+    postprocess(graph, scan_id)
     snapshot_vertex = add_snapshot_vertex(neptune_client, scan_id)
     neptune_client.write_to_neptune_lpg(graph, scan_id, snapshot_vertex)
     logger.debug('scan %s: finished writting results to Gremlin DB', scan_id)
@@ -133,56 +130,3 @@ def generate_scan_id():
     scan_time = str(int(now.timestamp()))
     scan_id = "/".join((scan_date, scan_time, str(uuid.uuid4())))
     return scan_id
-
-
-class AltimeterUniverseGraph:
-    """This class expands the information of an Altimeter GraphSet that
-    contains the result of a scan, so it matches the expected schema of
-    the Altimeter Universe."""
-
-    def __init__(self, graph):
-        self.graph = graph
-
-    def to_gremlin_lpg(self, scan_id):
-        """Converts the graph stored in an instance of the
-        AltimeterUniverseGraph into a graph dictionary that can be used with
-        the ``AltimeterNeptuneClient.write_to_neptune_lpg`` method to store the
-        graph in a Gremlin compatible DB. Returns the generated dictionary and
-        the id of the snapshot vertex."""
-        graph_dict = self.graph.to_neptune_lpg(scan_id)
-        expand_iam_policies(graph_dict)
-        _fix_orphan_edges(graph_dict, scan_id)
-        return graph_dict
-
-
-def _create_vertex(v_id, scan_id):
-    """Returns an Altimeter vertex given a vertex ID and a scan ID."""
-    label = AltimeterNeptuneClient.parse_arn(v_id)["resource"]
-    new_vertex = {
-        "~id": v_id,
-        "~label": label,
-        "scan_id": scan_id,
-        "arn": str(v_id),
-    }
-    return new_vertex
-
-
-def _fix_orphan_edges(graph_dict, scan_id):
-    """Finds the edges with non existent in or out vertices."""
-    vertices = graph_dict["vertices"]
-    edges = graph_dict["edges"]
-
-    existing_vertices = {v["~id"] for v in vertices}
-    non_existing_vertices = {}
-    for e in edges:
-        from_vid = e["~from"]
-        to_vid = e["~to"]
-        if ((from_vid not in existing_vertices) and
-           (from_vid not in non_existing_vertices)):
-            non_existing_vertices[from_vid] = _create_vertex(from_vid, scan_id)
-        if ((to_vid not in existing_vertices) and
-           (to_vid not in non_existing_vertices)):
-            non_existing_vertices[to_vid] = _create_vertex(to_vid, scan_id)
-
-    vertices = vertices + list(non_existing_vertices.values())
-    graph_dict["vertices"] = vertices
