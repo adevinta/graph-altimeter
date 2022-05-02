@@ -10,7 +10,11 @@ import logging
 from policyuniverse.policy import Policy
 from policyuniverse.arn import ARN
 
-from graph_altimeter import InvalidArnError, InvalidArnPattern
+from graph_altimeter import (
+    InvalidArnError,
+    InvalidArnPatternError,
+    EmptyActionsError,
+)
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -157,10 +161,14 @@ def _aws_arn_rules(document):
                         statement.effect,
                 )
                 rules.append(rule)
-            except InvalidArnPattern as e:
+            except InvalidArnPatternError as e:
                 # There could be policy documents that contain invalid
                 # policies.
                 logger.warning(e)
+            except EmptyActionsError:
+                # The statement does not contain any action.
+                # TODO: take into account the "NotAction" field.
+                logger.warning('statement with no actions')
     return rules
 
 
@@ -190,6 +198,9 @@ class ARNRule:
         # arn pattern example:
         # arn:aws:ssm:eu-west-1:*:parameter/grafana/loki/*
 
+        if len(service_permissions) == 0 or len(actions) == 0:
+            raise EmptyActionsError
+
         # Translate the permissions to Read and Write.
         translated = {}
         for tech in service_permissions:
@@ -205,7 +216,7 @@ class ARNRule:
         # pattern "*" that the policyuniverse lib considers invalid but it's
         # indeed valid.
         if pattern.error and pattern.arn != "*":
-            raise InvalidArnPattern(arn_pattern)
+            raise InvalidArnPatternError(arn_pattern)
 
         self.arn_pattern = pattern
         self.service_permissions = translated
