@@ -75,7 +75,7 @@ def test_run(g, opt_write_testdata, aws_resources):
         )
 
         config = AltimeterConfig(config_dict)
-        scan_config = config.config_dict([account_id], target_account_role)
+        scan_config = config.config_dict(account_id, target_account_role)
         altimeter_config = AWSConfig.parse_obj(scan_config)
 
         run(altimeter_config, resource_specs=resource_specs)

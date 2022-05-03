@@ -92,20 +92,20 @@ class AltimeterConfig:
 
     def config_dict(
         self,
-        target_accounts_ids,
-        target_accounts_role,
+        target_account_id,
+        target_account_role,
         trampoline_account_role_arn=None,
     ):
-        """This function returns a dictionary suitable run an Altimeter Scan by
-        using the base dictionary stored in the instance, and the given
-        ``accounts_ids`` to scan, the ``target_accounts_role`` to be assumed in
-        those accounts, and a optional trampoline account."""
+        """This function returns a dictionary suitable to run an Altimeter Scan
+        by using the base dictionary stored in the instance, a
+        ``target_account_id`` to scan, the ``target_account_role`` to be
+        assumed in that account and an optional trampoline account."""
         config_dict = copy.deepcopy(self.__config_dict)
         config_dict["accessor"] = account_accessor_dict(
-            target_accounts_role,
+            target_account_role,
             trampoline_account_role_arn,
         )
-        config_dict['scan']['accounts'] = target_accounts_ids
+        config_dict['scan']['accounts'] = [target_account_id]
         return config_dict
 
 
