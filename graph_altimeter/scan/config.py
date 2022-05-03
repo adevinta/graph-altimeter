@@ -133,7 +133,7 @@ def account_accessor_dict(target_account_role, trampoline_account_role_arn):
         'cache_creds': True,
         'multi_hop_accessors': [
             {
-                'role_session_name': "audit_session",
+                'role_session_name': "graph-altimeter",
                 'access_steps': access_steps,
             }
         ]

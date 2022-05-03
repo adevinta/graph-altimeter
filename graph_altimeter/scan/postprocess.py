@@ -15,9 +15,9 @@ def postprocess(graph_dict, scan_id, account_id):
     # in any case, and because the graph of an account can potentially have a
     # big number of nodes, we should improve this code even if we can only
     # reduce the constants of the linear part of the complexity.
-    expand_iam_policies(graph_dict)
-    _fix_orphan_edges(graph_dict, scan_id)
     _add_account_id(graph_dict, account_id)
+    expand_iam_policies(graph_dict)
+    _fix_orphan_edges(graph_dict, scan_id, account_id)
 
 
 def _add_account_id(graph_dict, account_id):
@@ -28,19 +28,20 @@ def _add_account_id(graph_dict, account_id):
         v["account_id"] = account_id
 
 
-def _create_vertex(v_id, scan_id):
+def _create_vertex(v_id, scan_id, account_id):
     """Returns an Altimeter vertex given a vertex ID and a scan ID."""
     label = AltimeterNeptuneClient.parse_arn(v_id)["resource"]
     new_vertex = {
         "~id": v_id,
         "~label": label,
         "scan_id": scan_id,
+        "account_id": account_id,
         "arn": str(v_id),
     }
     return new_vertex
 
 
-def _fix_orphan_edges(graph_dict, scan_id):
+def _fix_orphan_edges(graph_dict, scan_id, account_id):
     """Finds the edges with non existent in or out vertices."""
     vertices = graph_dict["vertices"]
     edges = graph_dict["edges"]
@@ -52,10 +53,18 @@ def _fix_orphan_edges(graph_dict, scan_id):
         to_vid = e["~to"]
         if ((from_vid not in existing_vertices) and
            (from_vid not in non_existing_vertices)):
-            non_existing_vertices[from_vid] = _create_vertex(from_vid, scan_id)
+            non_existing_vertices[from_vid] = _create_vertex(
+                from_vid,
+                scan_id,
+                account_id,
+            )
         if ((to_vid not in existing_vertices) and
            (to_vid not in non_existing_vertices)):
-            non_existing_vertices[to_vid] = _create_vertex(to_vid, scan_id)
+            non_existing_vertices[to_vid] = _create_vertex(
+                to_vid,
+                scan_id,
+                account_id,
+            )
 
     vertices = vertices + list(non_existing_vertices.values())
     graph_dict["vertices"] = vertices

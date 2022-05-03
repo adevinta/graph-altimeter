@@ -6,6 +6,6 @@ policyuniverse==1.4.0.20220110
 git+https://github.com/manelmontilla/altimeter.git@dev
 
 # neptune_python_utils dependencies.
-boto3==1.20.44
+boto3==1.21.20
 backoff==1.11.1
 aiohttp==3.8.0
