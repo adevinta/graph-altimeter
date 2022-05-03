@@ -11,7 +11,7 @@ from graph_altimeter import (
     EnvVarNotSetError,
     AltimeterError,
 )
-from graph_altimeter.scan import run
+from graph_altimeter.scan import run, AltimeterScanAccountError
 from graph_altimeter.scan.config import AltimeterConfig
 from graph_altimeter.asset_inventory import get_aws_accounts
 
@@ -23,12 +23,13 @@ def main():
     """Entrypoint of the graph_altimeter_batch command."""
     debug = os.getenv('DEBUG', '') != ''
     config_root_logger(debug)
-
+    logger.info("start scanning accounts")
     try:
         run_scan()
     except AltimeterError as e:
-        logger.error('error running altimeter scan: %s', e)
+        logger.error('unexpected error scanning accounts: %s', e)
         sys.exit(1)
+    logger.info("finished scanning accounts")
 
 
 def run_scan():
@@ -59,7 +60,14 @@ def run_scan():
             trampoline_account_role_arn,
         )
         altimeter_config = AWSConfig.parse_obj(scan_config)
-        run(altimeter_config, account_id)
+        try:
+            run(altimeter_config, account_id)
+        except AltimeterScanAccountError as error:
+            logger.error(
+                "error scanning account %s, detail: %s",
+                account_id,
+                str(error)
+            )
 
 
 def config_root_logger(debug):
