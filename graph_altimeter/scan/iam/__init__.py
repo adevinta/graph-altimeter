@@ -83,15 +83,22 @@ def expand_iam_policies(graph_dict):
     vertices = graph_dict["vertices"]
     for v in vertices:
         rules = []
+        policy_document = None
+        policy_account = None
+        v_id = v["~id"]
+
         if v["~label"] == "embedded_policy":
             if "policy_document" in v:
-                rules = _aws_arn_rules(v["policy_document"])
+                policy_document = v["policy_document"]
+                policy_account = v["account_id"]
         elif v["~label"] == "aws:iam:policy":
             if "default_version_policy_document_text" in v:
-                rules = _aws_arn_rules(
-                    v["default_version_policy_document_text"]
-                )
-        iam_edges = _link_to_resources(v["~id"], rules, vertices)
+                policy_document = v["default_version_policy_document_text"]
+                policy_account = v["account_id"]
+
+        if policy_document is not None:
+            rules = _aws_arn_rules(policy_document, policy_account)
+        iam_edges = _link_to_resources(v_id, rules, vertices)
         for edge in iam_edges:
             edges.append(edge)
 
@@ -145,9 +152,9 @@ def _create_edge(from_id, to_id, label, properties):
     return e
 
 
-def _aws_arn_rules(document):
-    """Given a string containing a policy document returns the corresponding
-    list of rules."""
+def _aws_arn_rules(document, account_id):
+    """Given a string containing a policy document, and the account the policy
+    belongs to, returns the corresponding list of rules."""
     document = json.loads(document)
     policy = Policy(document)
     rules = []
@@ -159,6 +166,7 @@ def _aws_arn_rules(document):
                         statement.actions_expanded,
                         resource,
                         statement.effect,
+                        account_id,
                 )
                 rules.append(rule)
             except InvalidArnPatternError as e:
@@ -182,9 +190,16 @@ class ARNRule:
             "Write": "Write",
     }
 
-    def __init__(self, service_permissions, actions, arn_pattern, effect):
+    def __init__(
+        self,
+        service_permissions,
+        actions,
+        arn_pattern,
+        effect,
+        account
+    ):  # pylint: disable=too-many-arguments
         """Creates a rule from a given set of service permissions, actions, an
-        arn pattern and an effect. """
+        arn pattern, an effect and an account. """
         # Service permissions example:
         # {
         #   'sqs': {'Tagging', 'Permissions', 'Read', 'List', 'Write'},
@@ -222,10 +237,12 @@ class ARNRule:
         self.service_permissions = translated
         self.effect = effect
         self.actions = actions
+        self.account = account
 
     def __str__(self):
         arn_pattern = f"{self.arn_pattern.arn}"
-        return f"""arn_pattern:{str(arn_pattern)}
+        return f"""account:{str(self.account)}
+        arn_pattern:{str(arn_pattern)}
         actions:{str(self.actions)}
         service_permissions:{str(self.service_permissions)}
         effect:{str(self.effect)}
@@ -234,11 +251,17 @@ class ARNRule:
     # pylint: disable=too-many-return-statements, too-many-branches
     def matches(self, arn):
         """Returns a set with the permissions a rule grants to an
-        aws resource represented given its arn. Returns None if no permissions
+        aws resource given its arn. Returns None if no permissions
         are granted. The possible permissions are 'Read' and 'Write'."""
         target_arn = ARN(arn)
         if target_arn.error:
             raise InvalidArnError(arn)
+
+        # By now, we are not following trust relationships across accounts, so
+        # a rule defined in one account only matches resources of the same
+        # account.
+        if target_arn.account_number != self.account:
+            return None
 
         if self.arn_pattern.arn == "*":
             if target_arn.tech in self.service_permissions:

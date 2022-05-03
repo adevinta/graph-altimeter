@@ -35,10 +35,11 @@ def test_match_rule_global_resource():
     statement = policy.statements[0]
     resource = statement.resources.pop()
     rule = ARNRule(
-            statement.action_summary(),
-            statement.actions_expanded,
-            resource,
-            statement.effect,
+        statement.action_summary(),
+        statement.actions_expanded,
+        resource,
+        statement.effect,
+        "123456768124"
     )
     assert(rule.matches(target_arn) == {"Read", "Write"})
 
@@ -68,9 +69,44 @@ def test_match_resource():
     statement = policy.statements[0]
     resource = statement.resources.pop()
     rule = ARNRule(
-            statement.action_summary(),
-            statement.actions_expanded,
-            resource,
-            statement.effect,
+        statement.action_summary(),
+        statement.actions_expanded,
+        resource,
+        statement.effect,
+        "123456768124"
     )
     assert rule.matches(target_arn) == {"Read"}
+
+
+def test_dont_match_different_account_():
+    """Tests a rule does not match an AWS resource defined in a different
+    account than the rule."""
+    document = """
+        {
+            "Statement": [
+                {
+                    "Action": [
+                        "dynamodb:Scan"
+                    ],
+                    "Effect": "Allow",
+                    "Resource": [
+                        "arn:aws:dynamodb:*:*:table/table*"
+                    ]
+                }
+            ],
+            "Version": "2012-10-17"
+        }
+    """
+    target_arn = "arn:aws:dynamodb:eu-west-1:111111111111:table/table2"
+    document = json.loads(document)
+    policy = Policy(document)
+    statement = policy.statements[0]
+    resource = statement.resources.pop()
+    rule = ARNRule(
+        statement.action_summary(),
+        statement.actions_expanded,
+        resource,
+        statement.effect,
+        "123456768124"
+    )
+    assert rule.matches(target_arn) is None
