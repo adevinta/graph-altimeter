@@ -59,7 +59,7 @@ def run_scan():
             trampoline_account_role_arn,
         )
         altimeter_config = AWSConfig.parse_obj(scan_config)
-        run(altimeter_config)
+        run(altimeter_config, account_id)
 
 
 def config_root_logger(debug):

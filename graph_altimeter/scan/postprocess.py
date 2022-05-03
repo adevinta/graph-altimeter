@@ -6,12 +6,26 @@ from altimeter.core.neptune.client import AltimeterNeptuneClient
 from graph_altimeter.scan.iam import expand_iam_policies
 
 
-def postprocess(graph_dict, scan_id):
+def postprocess(graph_dict, scan_id, account_id):
     """Postprocess in place the dictionary returned by Altimeter as
     a result of a scan so it matches the expected schema of the Altimeter
     Universe."""
+    # Expanding policies is quadratic in time complexity (to the number of
+    # nodes in the graph), adding orphan edges and account id's is linear, but
+    # in any case, and because the graph of an account can potentially have a
+    # big number of nodes, we should improve this code even if we can only
+    # reduce the constants of the linear part of the complexity.
     expand_iam_policies(graph_dict)
     _fix_orphan_edges(graph_dict, scan_id)
+    _add_account_id(graph_dict, account_id)
+
+
+def _add_account_id(graph_dict, account_id):
+    """Adds the property account_id to all the vertices in the graph
+    dictionary."""
+    vertices = graph_dict["vertices"]
+    for v in vertices:
+        v["account_id"] = account_id
 
 
 def _create_vertex(v_id, scan_id):
