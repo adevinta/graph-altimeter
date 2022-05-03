@@ -31,13 +31,13 @@ aws-xray-sdk==2.9.0
     # via moto
 backoff==1.11.1
     # via -r /work/requirements-dev.in
-boto3==1.20.44
+boto3==1.21.20
     # via
     #   -r /work/requirements-dev.in
     #   altimeter
     #   aws-sam-translator
     #   moto
-botocore==1.23.54
+botocore==1.24.46
     # via
     #   aws-xray-sdk
     #   boto3
@@ -157,7 +157,7 @@ pycodestyle==2.7.0
     # via flake8
 pycparser==2.21
     # via cffi
-pydantic==1.9.0
+pydantic==1.8.2
     # via altimeter
 pyflakes==2.3.1
     # via flake8
