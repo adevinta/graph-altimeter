@@ -68,3 +68,7 @@ class InvalidArnPatternError(Exception):
 
 class EmptyActionsError(Exception):
     """The statement in the IAM policy does not contain any action."""
+
+
+class AltimeterScanAccountError(AltimeterError):
+    """Altimeter was unable to scan an account."""
