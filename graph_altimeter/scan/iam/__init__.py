@@ -318,10 +318,11 @@ class ARNRule:
     def _matches_wildcard_resource_name(self, target_name):
         """Tests if the rule containing a wildcard in the name pattern matches
         a given arn name part."""
-        name_pattern = self.arn_pattern.name.replace("*", ".*")
+        esc_name_pattern = re.escape(self.arn_pattern.name)
+        name_pattern = esc_name_pattern.replace("\\*", ".*?")
         # We must ensure that a ``name_pattern`` like this: "name/*" matches a
         # ``target_name`` like this "name".
-        if name_pattern.endswith("/.*") and not target_name.endswith("/"):
+        if name_pattern.endswith("/.*?") and not target_name.endswith("/"):
             target_name = target_name + "/"
         match = re.match(name_pattern, target_name) is not None
         return match
