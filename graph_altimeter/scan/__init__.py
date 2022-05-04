@@ -82,16 +82,7 @@ def run(config, account_id, resource_specs=None):
         artifact_reader=artifact_reader,
     )
 
-    scanned_accounts = manifest.scanned_accounts
     not_scanned_accounts = manifest.unscanned_accounts
-    logger.debug(
-        "finished scan %s, \
-        scanned account: %s, \
-        not scanned account: %s",
-        scan_id,
-        scanned_accounts,
-        not_scanned_accounts,
-    )
     graph = graph_set.to_neptune_lpg(scan_id)
     if len(not_scanned_accounts) > 0:
         error_msg = get_unscanned_account_error(graph)
