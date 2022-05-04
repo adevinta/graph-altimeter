@@ -82,9 +82,8 @@ def run(config, account_id, resource_specs=None):
         artifact_reader=artifact_reader,
     )
 
-    not_scanned_accounts = manifest.unscanned_accounts
     graph = graph_set.to_neptune_lpg(scan_id)
-    if len(not_scanned_accounts) > 0:
+    if len(manifest.unscanned_accounts) > 0:
         error_msg = get_unscanned_account_error(graph)
         raise AltimeterScanAccountError(error_msg)
 
@@ -137,6 +136,5 @@ def get_unscanned_account_error(graph_dict):
     vertices = graph_dict["vertices"]
     for v in vertices:
         if v["~label"] == "error" and "error" in v:
-            error = v["error"]
-            return error
+            return v["error"]
     return "unknown error"
