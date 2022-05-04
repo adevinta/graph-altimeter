@@ -23,7 +23,7 @@ def main():
     """Entrypoint of the graph_altimeter_batch command."""
     debug = os.getenv('DEBUG', '') != ''
     config_root_logger(debug)
-    logger.info("start scanning accounts")
+    logger.info("started scanning accounts")
     try:
         run_scan()
     except AltimeterError as e:
