@@ -62,11 +62,11 @@ def run_scan():
         altimeter_config = AWSConfig.parse_obj(scan_config)
         try:
             run(altimeter_config, account_id)
-        except AltimeterScanAccountError as error:
+        except AltimeterScanAccountError as e:
             logger.error(
                 "error scanning account %s, detail: %s",
                 account_id,
-                str(error)
+                str(e)
             )
 
 
