@@ -127,7 +127,7 @@ def aws_resources(aws_credentials):
         region_name=resource_region_name,
     )
     subnet_1_cidr = "10.0.0.0/24"
-    create_subnet(
+    subnet1_id = create_subnet(
         cidr_block=subnet_1_cidr,
         vpc_id=vpc_1_id,
         region_name=resource_region_name,
@@ -196,6 +196,7 @@ def aws_resources(aws_credentials):
     lambda_function_1_description = "Test Lambda Function 1"
     lambda_function_1_timeout = 30
     lambda_function_1_memory_size = 256
+
     create_lambda_function(
         name=lambda_function_1_name,
         runtime=lambda_function_1_runtime,
@@ -206,6 +207,28 @@ def aws_resources(aws_credentials):
         memory_size=lambda_function_1_memory_size,
         publish=False,
         region_name=resource_region_name,
+        subnet_ids=[subnet1_id]
+    )
+
+    lambda_function_1_name = "test_lambda_function_2"
+    lambda_function_1_runtime = "python3.7"
+    lambda_function_1_handler = "lambda_function.lambda_handler"
+    lambda_function_1_description = "Test Lambda Function 2"
+    lambda_function_1_timeout = 30
+    lambda_function_1_memory_size = 256
+
+    create_lambda_function(
+        name=lambda_function_1_name,
+        runtime=lambda_function_1_runtime,
+        role_name=role_1_arn,
+        handler=lambda_function_1_handler,
+        description=lambda_function_1_description,
+        timeout=lambda_function_1_timeout,
+        memory_size=lambda_function_1_memory_size,
+        publish=False,
+        region_name=resource_region_name,
+        security_groups=["sg1-inexistent"],
+        subnet_ids=["sb1-inexistent"]
     )
 
     graph = None
@@ -386,9 +409,12 @@ def create_lambda_function(
     memory_size,
     publish,
     region_name,
+    security_groups=None,
+    subnet_ids=None
 ):
     """Creates a Lambda function."""
     # pylint: disable=too-many-arguments
+    # pylint: disable=too-many-locals
 
     zip_content = None
     zip_output = io.BytesIO()
@@ -404,6 +430,16 @@ def lambda_handler(event, context):
         zip_content = zip_output.read()
 
     client = boto3.client("lambda", region_name=region_name)
+    vpc_config = {
+        "SubnetIds": [],
+        "SecurityGroupIds": []
+    }
+    if security_groups is not None:
+        vpc_config["SubnetIds"] = vpc_config["SubnetIds"] + subnet_ids
+    if security_groups is not None:
+        vpc_config["SecurityGroupIds"] = \
+            vpc_config["SecurityGroupIds"] + security_groups
+
     resp = client.create_function(
         FunctionName=name,
         Runtime=runtime,
@@ -414,6 +450,7 @@ def lambda_handler(event, context):
         Timeout=timeout,
         MemorySize=memory_size,
         Publish=publish,
+        VpcConfig=vpc_config
     )
     return resp["FunctionArn"]
 
