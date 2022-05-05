@@ -37,7 +37,7 @@ def _create_vertex(v_id, scan_id, account_id):
         "scan_id": scan_id,
         "account_id": account_id,
         "arn": str(v_id),
-        "missing": "yes"
+        "missing": True
     }
     return new_vertex
 
