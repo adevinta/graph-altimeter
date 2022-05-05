@@ -413,7 +413,7 @@ def create_lambda_function(
     subnets=None
 ):
     """Creates a Lambda function."""
-    # pylint: disable=too-many-arguments, disable=too-many-locals
+    # pylint: disable=too-many-arguments,too-many-locals
 
     zip_content = None
     zip_output = io.BytesIO()
