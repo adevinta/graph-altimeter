@@ -78,7 +78,7 @@ def aws_credentials():
 @pytest.fixture(scope='session')
 def aws_resources(aws_credentials):
     """Creates AWS resources using moto to mock AWS."""
-    # pylint: disable=too-many-locals
+    # pylint: disable=too-many-locals, too-many-statements
 
     # Make random operations predictable (e.g. resources ARNs, policy IDs).
     random.seed(0)
@@ -90,6 +90,7 @@ def aws_resources(aws_credentials):
         moto.mock_lambda(),
         moto.mock_s3(),
         moto.mock_sts(),
+        moto.mock_resourcegroupstaggingapi(),
     ]
 
     for mock in aws_mocks:
@@ -230,6 +231,20 @@ def aws_resources(aws_credentials):
         security_groups=["sg1-inexistent"],
         subnets=["sb1-inexistent"]
     )
+
+    instance_id = create_instance(
+        "ami-12c6146b", "t2.micro",
+        [],
+        resource_region_name
+    )
+    image_tags = [
+        {
+            "Value": 'p1:p2:p3:p4//p4.1/p4.3/p4.3:p5:p6:p7/',
+            "Key": 'detailedDescription'
+        }
+    ]
+    image_id = create_image(instance_id, "image_one", resource_region_name)
+    tag_resource(image_id, image_tags)
 
     graph = None
     with open(TESTDATA_DIR / "graph.json", "rb") as graph_file:
@@ -468,3 +483,42 @@ def create_bucket(name, account_id, region_name):
         f"arn:aws:s3:{region_name}:{account_id}:bucket/{name}",
         creation_date,
     )
+
+
+def create_instance(image_id, instance_type, tags, region_name):
+    """Creates and instance using the given `image_id`, for instance:
+    'ami-one', `instance_type`, for instance: 't2.micro', `tags`, for instance
+    [{'Key': 'tag_one', 'value': 'value'}] and `region_name`, for instance:
+    'eu-central-one'. Returns the instance_id."""
+    client = boto3.client("ec2", region_name=region_name)
+    instance = client.run_instances(
+        ImageId=image_id,
+        MinCount=1,
+        MaxCount=1,
+        InstanceType=instance_type,
+        TagSpecifications=[
+            {
+                "ResourceType": "instance",
+                "Tags": tags,
+            }
+        ],
+    )
+    return instance["Instances"][0]["InstanceId"]
+
+
+def create_image(instance_id, name, region_name):
+    """Creates an image from the given ec2 ``instance_id``, the given ``name``
+    in the given region."""
+    client = boto3.client("ec2", region_name=region_name)
+    image_id = client.create_image(
+        Name=name,
+        InstanceId=instance_id
+    )["ImageId"]
+    return image_id
+
+
+def tag_resource(arn, tags):
+    """Tags the resource identified by specified ``arn`` with the tags
+    specified in the ``tags``dictionary."""
+    client = boto3.client("ec2")
+    client.create_tags(Resources=[arn], Tags=tags)
