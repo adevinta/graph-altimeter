@@ -51,8 +51,13 @@ def run_scan():
     else:
         accounts = get_aws_accounts(asset_inventory_api_url)
 
-    for account_id in accounts:
-        logger.info("scanning account %s", account_id)
+    for i, account_id in enumerate(accounts):
+        logger.info(
+            "scanning account %s (%s/%s)",
+            account_id,
+            i + 1,
+            len(accounts)
+        )
         config = AltimeterConfig.from_env()
         scan_config = config.config_dict(
             account_id,
@@ -80,9 +85,9 @@ def config_root_logger(debug):
         root_logger.setLevel(logging.DEBUG)
     else:
         root_logger.setLevel(logging.INFO)
-        # Altimeter's INFO level is too verbose. So we set it to WARNING on
+        # Altimeter's INFO level is too verbose. So we set it to ERROR on
         # non-debug mode.
-        logging.getLogger('altimeter').setLevel(logging.WARNING)
+        logging.getLogger('altimeter').setLevel(logging.ERROR)
 
     logging_handler = logging.StreamHandler(stream=sys.stderr)
     formatter = logging.Formatter(
