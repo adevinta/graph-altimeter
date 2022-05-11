@@ -7,11 +7,8 @@ import logging
 
 from altimeter.core.config import AWSConfig
 
-from graph_altimeter import (
-    EnvVarNotSetError,
-    AltimeterError,
-)
-from graph_altimeter.scan import run, AltimeterScanAccountError
+from graph_altimeter import EnvVarNotSetError
+from graph_altimeter.scan import run
 from graph_altimeter.scan.config import AltimeterConfig
 from graph_altimeter.asset_inventory import get_aws_accounts
 
@@ -24,15 +21,12 @@ def main():
     debug = os.getenv('DEBUG', '') != ''
     config_root_logger(debug)
     logger.info("started scanning accounts")
-    try:
-        run_scan()
-    except AltimeterError as e:
-        logger.error('unexpected error scanning accounts: %s', e)
-        sys.exit(1)
+    run_scan()
     logger.info("finished scanning accounts")
 
 
 def run_scan():
+    # pylint: disable=broad-except
     """Scans the accounts defined in the Asset Inventory using Altimeter."""
     asset_inventory_api_url = os.getenv('ASSET_INVENTORY_API_URL', None)
     accounts_to_scan = os.getenv("ACCOUNTS", None)
@@ -62,7 +56,7 @@ def run_scan():
         altimeter_config = AWSConfig.parse_obj(scan_config)
         try:
             run(altimeter_config, account_id)
-        except AltimeterScanAccountError as e:
+        except Exception as e:
             logger.error(
                 "error scanning account %s, detail: %s",
                 account_id,
