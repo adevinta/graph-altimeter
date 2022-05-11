@@ -56,12 +56,13 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
         t = g
         for r in vertices:
             vertex_id = f'{r["~id"]}_{scan_id}'
+            label = self.__label_for(r["~label"])
             t = (
                     t.V(vertex_id)
                     .fold()
                     .coalesce(
                         __.unfold(),
-                        __.addV(self.parse_arn(r["~label"])["resource"])
+                        __.addV(label)
                         .property(T.id, vertex_id)
                         .sideEffect(
                             __.addE("includes")
@@ -107,6 +108,8 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
         for r in edges:
             to_id = f'{r["~to"]}_{scan_id}'
             from_id = f'{r["~from"]}_{scan_id}'
+            label_from = self.__label_for(r["~from"])
+            label_to = self.__label_for(r["~to"])
             t = (
                 t.addE(r["~label"])
                 .property(T.id, str(r["~id"]))
@@ -115,7 +118,7 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
                     .fold()
                     .coalesce(
                         __.unfold(),
-                        __.addV(self.parse_arn(r["~from"])["resource"])
+                        __.addV(label_from)
                         .property(T.id, from_id)
                         .property("scan_id", scan_id)
                         .property("arn", str(r["~from"])),
@@ -126,7 +129,7 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
                     .fold()
                     .coalesce(
                         __.unfold(),
-                        __.addV(self.parse_arn(r["~to"])["resource"])
+                        __.addV(label_to)
                         .property(T.id, to_id)
                         .property("scan_id", scan_id)
                         .property("arn", str(r["~to"])),
@@ -148,3 +151,13 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
                     raise NeptuneLoadGraphException(
                         f"Error loading edge {r} " f"with {str(t.bytecode)}"
                     ) from err
+
+    def __label_for(self, node_id):
+        """
+        Builds the label of a vertex or edge from his id.
+        """
+        parts = self.parse_arn(node_id)
+        label = parts["resource"]
+        if label == '':
+            label = "unknown"
+        return label
