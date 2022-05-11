@@ -172,11 +172,11 @@ def _aws_arn_rules(document, account_id):
             except InvalidArnPatternError as e:
                 # There could be policy documents that contain invalid
                 # policies.
-                logger.warning(e)
+                logger.debug(e)
             except EmptyActionsError:
                 # The statement does not contain any action.
                 # TODO: take into account the "NotAction" field.
-                logger.warning('statement with no actions')
+                logger.debug('statement with no actions')
     return rules
 
 
