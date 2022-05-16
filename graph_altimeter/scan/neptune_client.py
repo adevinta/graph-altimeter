@@ -54,7 +54,7 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
         link_from_id param."""
         cnt = 0
         t = g
-        logger.info('Writing %s vertices', len(vertices))
+        logger.info('Writing %d vertices', len(vertices))
         for r in vertices:
             vertex_id = f'{r["~id"]}_{scan_id}'
             t = (
@@ -105,7 +105,7 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
         """
         cnt = 0
         t = g
-        logger.info('Writing %s edges', len(edges))
+        logger.info('Writing %d edges', len(edges))
         for r in edges:
             to_id = f'{r["~to"]}_{scan_id}'
             from_id = f'{r["~from"]}_{scan_id}'
