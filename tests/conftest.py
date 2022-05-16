@@ -486,9 +486,9 @@ def create_bucket(name, account_id, region_name):
 
 
 def create_instance(image_id, instance_type, tags, region_name):
-    """Creates and instance using the given `image_id`, for instance:
+    """Creates an instance using the given `image_id`, for instance:
     'ami-one', `instance_type`, for instance: 't2.micro', `tags`, for instance
-    [{'Key': 'tag_one', 'value': 'value'}] and `region_name`, for instance:
+    [{'Key': 'tag_one', 'value': 'value_one'}] and `region_name`, for instance:
     'eu-central-one'. Returns the instance_id."""
     client = boto3.client("ec2", region_name=region_name)
     instance = client.run_instances(
@@ -507,7 +507,7 @@ def create_instance(image_id, instance_type, tags, region_name):
 
 
 def create_image(instance_id, name, region_name):
-    """Creates an image from the given ec2 ``instance_id``, the given ``name``
+    """Creates an image from the given ec2 ``instance_id`` and the given ``name``
     in the given region."""
     client = boto3.client("ec2", region_name=region_name)
     image_id = client.create_image(
@@ -518,7 +518,7 @@ def create_image(instance_id, name, region_name):
 
 
 def tag_resource(arn, tags):
-    """Tags the resource identified by specified ``arn`` with the tags
+    """Tags the resource identified by the specified ``arn`` with the tags
     specified in the ``tags``dictionary."""
     client = boto3.client("ec2")
     client.create_tags(Resources=[arn], Tags=tags)
