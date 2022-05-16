@@ -53,7 +53,7 @@ def run_scan():
 
     for i, account_id in enumerate(accounts):
         logger.info(
-            "scanning account %s (%s/%s)",
+            "scanning account %s (%d/%d)",
             account_id,
             i + 1,
             len(accounts)
