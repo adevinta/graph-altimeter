@@ -154,7 +154,7 @@ class GraphAltimeterNeptuneClient(AltimeterNeptuneClient):
 
     def __label_for(self, node_id):
         """
-        Builds the label of a vertex or edge from his id.
+        Builds the label of a vertex or edge from its id.
         """
         parts = self.parse_arn(node_id)
         label = parts["resource"]
