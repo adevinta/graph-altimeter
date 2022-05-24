@@ -20,6 +20,8 @@ def clean_blacklist(obj):
         "end_time",
         "creation_time",
         "create_time",
+        "launch_time",
+        "attach_time",
     ]
 
     for field in blacklist:

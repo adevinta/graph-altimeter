@@ -9,6 +9,10 @@ from altimeter.aws.resource.awslambda.function import (
 from altimeter.aws.resource.ec2.flow_log import FlowLogResourceSpec
 from altimeter.aws.resource.ec2.volume import EBSVolumeResourceSpec
 from altimeter.aws.resource.ec2.subnet import SubnetResourceSpec
+from altimeter.aws.resource.ec2.instance import EC2InstanceResourceSpec
+from altimeter.aws.resource.ec2.image import EC2ImageResourceSpec
+
+
 from altimeter.aws.resource.ec2.vpc import VPCResourceSpec
 from altimeter.aws.resource.iam.policy import IAMPolicyResourceSpec
 from altimeter.aws.resource.iam.role import IAMRoleResourceSpec
@@ -72,6 +76,8 @@ def test_run(g, opt_write_testdata, aws_resources):
                 S3BucketResourceSpec,
                 SubnetResourceSpec,
                 VPCResourceSpec,
+                EC2InstanceResourceSpec,
+                EC2ImageResourceSpec,
         )
 
         config = AltimeterConfig(config_dict)
