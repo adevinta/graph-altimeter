@@ -27,8 +27,8 @@ echo "using notebooks dir: ${NOTEBOOKS}"
 
 mkdir -p extern
 
-ALTIMETER_REPO='https://github.com/manelmontilla/altimeter.git'
-ALTIMETER_BRANCH='dev'
+ALTIMETER_REPO='https://github.com/tableau/altimeter.git'
+ALTIMETER_BRANCH='master'
 if [[ ! -d 'extern/altimeter' ]]; then
 	git clone -b "${ALTIMETER_BRANCH}" "${ALTIMETER_REPO}" "extern/altimeter"
 else
