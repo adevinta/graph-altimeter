@@ -41,7 +41,7 @@ def test_match_rule_global_resource():
         statement.effect,
         "123456768124"
     )
-    assert(rule.matches(target_arn) == {"Read", "Write"})
+    assert rule.matches(target_arn) == {"Read", "Write"}
 
 
 def test_match_resource():

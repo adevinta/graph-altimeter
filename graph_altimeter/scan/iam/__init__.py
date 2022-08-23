@@ -34,7 +34,7 @@ def _load_iam_data(path):
     resources they allow access to. For instance:
     {'ec2:allocateaddres':{'elastic-ip', 'ipv4pool-ec2'}}"""
     data = None
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf-8") as file:
         data = json.load(file)
     actions = {}
     for service in data:

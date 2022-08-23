@@ -502,8 +502,8 @@ def create_instance(image_id, instance_type, region_name, subnet):
 
 
 def create_image(instance_id, name, region_name):
-    """Creates an image from the given ec2 ``instance_id`` and the given ``name``
-    in the given region."""
+    """Creates an image from the given ec2 ``instance_id`` and the given
+    ``name`` in the given region."""
     client = boto3.client("ec2", region_name=region_name)
     image_id = client.create_image(
         Name=name,

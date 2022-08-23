@@ -41,8 +41,7 @@ class AltimeterConfig:
             raise EnvVarNotSetError("TARGET_ACCOUNT_ROLE")
 
         neptune_endpoint_parts = parse.urlparse(gremlin_endpoint)
-        ssl = ((neptune_endpoint_parts.scheme == "wss") or
-               (neptune_endpoint_parts.scheme == "https"))
+        ssl = neptune_endpoint_parts.scheme in ("wss", "https")
 
         # TODO: We decided to use the european regions to scan global services
         # (defined at preferred_account_scan_regions). This list is hardcoded,
