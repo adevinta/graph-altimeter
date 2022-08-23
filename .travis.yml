@@ -1,14 +1,15 @@
+dist: bionic
+language: generic
 services:
   - docker
-
 env:
   global:
     - LOCAL_IMAGE="graph-altimeter:local"
     - DEV_IMAGE="purpleteam/graph-altimeter-dev:${TRAVIS_COMMIT}"
     - RELEASE_IMAGE="adevinta/graph-altimeter:${TRAVIS_TAG}"
-
+    - DOCKER_BUILDKIT=1
+    - BUILDKIT_PROGRESS=plain
 before_install: sudo ./script/cisetup
-
 jobs:
   include:
     # "test" stage.
