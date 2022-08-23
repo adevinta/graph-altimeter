@@ -1,15 +1,14 @@
 #!/bin/bash
 
-# Exit on error and undefined variable.
 set -e -u
 
 # Set working directory to the root of the repo.
 cd "$(dirname $0)/.."
 
-# Clean up all docker-compose projects.
+export DOCKER_BUILDKIT=1
 PROJECTS=(
 	'graph-altimeter-local'
-	'graph-altimeter-local-altimeter'
+	'graph-altimeter-dev-altimeter'
 	'graph-altimeter-test'
 	'graph-altimeter-lint'
 )

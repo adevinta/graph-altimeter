@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Exit on error and undefined variable.
 set -e -u
 
 # Set working directory to the root of the repo.
@@ -26,10 +25,8 @@ export NOTEBOOKS
 
 echo "using notebooks dir: ${NOTEBOOKS}"
 
-# External dependencies.
 mkdir -p extern
 
-# Altimeter.
 ALTIMETER_REPO='https://github.com/manelmontilla/altimeter.git'
 ALTIMETER_BRANCH='dev'
 if [[ ! -d 'extern/altimeter' ]]; then
@@ -38,7 +35,7 @@ else
 	echo 'skipping altimeter clone...' >&2
 fi
 
-# Run the docker-compose local altimeter environment.
-DOCKER_COMPOSE_PROJECT='graph-altimeter-local-altimeter'
-docker-compose -p "${DOCKER_COMPOSE_PROJECT}" build graph-altimeter-local-altimeter
-docker-compose -p "${DOCKER_COMPOSE_PROJECT}" run graph-altimeter-local-altimeter
+export DOCKER_BUILDKIT=1
+DOCKER_COMPOSE_PROJECT='graph-altimeter-dev-altimeter'
+docker-compose -p "${DOCKER_COMPOSE_PROJECT}" build graph-altimeter-dev-altimeter
+docker-compose -p "${DOCKER_COMPOSE_PROJECT}" run graph-altimeter-dev-altimeter
