@@ -84,7 +84,7 @@ def aws_resources(aws_credentials):
     random.seed(0)
 
     aws_mocks = [
-        moto.mock_dynamodb2(),
+        moto.mock_dynamodb(),
         moto.mock_ec2(),
         moto.mock_iam(),
         moto.mock_lambda(),
@@ -233,9 +233,10 @@ def aws_resources(aws_credentials):
     )
 
     instance_id = create_instance(
-        "ami-12c6146b", "t2.micro",
-        [],
-        resource_region_name
+        image_id="ami-12c6146b",
+        instance_type="t2.micro",
+        region_name=resource_region_name,
+        subnet=subnet1_id,
     )
     image_tags = [
         {
@@ -485,23 +486,17 @@ def create_bucket(name, account_id, region_name):
     )
 
 
-def create_instance(image_id, instance_type, tags, region_name):
-    """Creates an instance using the given `image_id`, for instance:
-    'ami-one', `instance_type`, for instance: 't2.micro', `tags`, for instance
-    [{'Key': 'tag_one', 'value': 'value_one'}] and `region_name`, for instance:
-    'eu-central-one'. Returns the instance_id."""
+def create_instance(image_id, instance_type, region_name, subnet):
+    """Creates an instance using the given `image_id`, `instance_type`,
+    `region_name` and `subnet`. Returns the instance_id."""
     client = boto3.client("ec2", region_name=region_name)
+
     instance = client.run_instances(
         ImageId=image_id,
         MinCount=1,
         MaxCount=1,
         InstanceType=instance_type,
-        TagSpecifications=[
-            {
-                "ResourceType": "instance",
-                "Tags": tags,
-            }
-        ],
+        SubnetId=subnet,
     )
     return instance["Instances"][0]["InstanceId"]
 
