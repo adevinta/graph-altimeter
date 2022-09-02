@@ -54,8 +54,8 @@ def test_universe_from_valid_semver():
 
 
 def test_universe_from_valid_intversion():
-    """Tests that from a correct interger version a proper ``UniverseVersion`` is
-    constructed."""
+    """Tests that from a correct interger version a proper ``UniverseVersion``
+    is constructed."""
 
     version = UniverseVersion.from_int_version(11)
     assert version.sem_version == "0.0.11"

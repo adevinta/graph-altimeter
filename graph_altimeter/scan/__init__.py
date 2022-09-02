@@ -100,9 +100,9 @@ def run(config, account_id, resource_specs=None):
 
 
 def add_snapshot_vertex(neptune_client, scan_id):
-    """Creates a Altimeter snapshot vertex and links it to the proper universe. It
-    also ensures that the current ``Universe`` vertex exists. Returns
-    the vertex of the snapshot."""
+    """Creates a Altimeter snapshot vertex and links it to the proper universe.
+    It also ensures that the current ``Universe`` vertex exists. Returns the
+    vertex of the snapshot."""
     # The vertex_id of the snapshot must follow a concrete naming convention.
     vertex_id = f"altimeter_snapshot_{scan_id}"
     _, conn = neptune_client.connect_to_gremlin()

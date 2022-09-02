@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Exit on error and undefined variable.
 set -e -u
 
 # Set working directory to the root of the repo.
@@ -26,7 +25,7 @@ export NOTEBOOKS
 
 echo "using notebooks dir: ${NOTEBOOKS}"
 
-# Run the docker-compose local environment.
+export DOCKER_BUILDKIT=1
 DOCKER_COMPOSE_PROJECT='graph-altimeter-local'
 docker-compose -p "${DOCKER_COMPOSE_PROJECT}" build graph-altimeter-local
 docker-compose -p "${DOCKER_COMPOSE_PROJECT}" run graph-altimeter-local

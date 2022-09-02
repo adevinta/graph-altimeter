@@ -1,8 +1,0 @@
-ARG PYTHON_IMAGE
-FROM ${PYTHON_IMAGE}
-
-ARG PIP_TOOLS_VERSION
-
-RUN apk add gcc musl-dev libffi-dev git
-
-RUN pip3 install "pip-tools==${PIP_TOOLS_VERSION}"
