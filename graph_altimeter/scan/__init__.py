@@ -3,6 +3,7 @@ Graph."""
 
 from datetime import datetime
 import logging
+import re
 import uuid
 import shutil
 from os import path
@@ -34,12 +35,17 @@ from graph_altimeter.scan.postprocess import postprocess
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
+aws_account_arn_re = re.compile('^arn:aws:iam::([0-9]{12}):root$')
+
+aws_account_id_re = re.compile('^[0-9]{12}$')
+
 
 def run(config, account_id, resource_specs=None):
     # pylint: disable=too-many-locals
     """Given an Altimeter ``config``, runs an Altimeter scan and stores the
     result in a Gremlin compatible DB following the Altimeter Universe
     schema."""
+
     endpoint = NeptuneEndpoint(
         host=config.neptune.host,
         port=config.neptune.port,
@@ -155,3 +161,25 @@ def remove_scan_files(temp_dir, scan_id):
         shutil.rmtree(scan_path)
     except FileNotFoundError:
         logger.debug("temp directory %s not found", scan_path)
+
+
+class InvalidAWSAccount(Exception):
+    """Returned when trying to normalize a malformed AWS account identifier."""
+
+    def __init__(self, aws_account):
+        super().__init__(
+            f'the format of the AWS_account: {aws_account} is invalid'
+        )
+
+
+def normalize_aws_account(aws_account):
+    """if the input is an AWS account arn, it returns the corresponding
+    account id. If the input is already an account id it just returns it.
+    Otherwise it raises an InvalidAWSAccount exception.
+    """
+    match = aws_account_arn_re.match(aws_account)
+    if match:
+        return match.group(1)
+    if aws_account_id_re.match(aws_account):
+        return aws_account
+    raise InvalidAWSAccount(aws_account)
