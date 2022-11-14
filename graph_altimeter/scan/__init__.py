@@ -164,19 +164,18 @@ def remove_scan_files(temp_dir, scan_id):
 
 
 class InvalidAWSAccount(Exception):
-    """Returned when normalized an AWS account identifier if the format is not
-    recognized."""
+    """Returned when trying to normalize a malformed AWS account identifier."""
 
-    def __init__(self, AWS_account):
+    def __init__(self, aws_account):
         super().__init__(
-            f'the format of the AWS_account: {AWS_account} is invalid'
+            f'the format of the AWS_account: {aws_account} is invalid'
         )
 
 
-def normalize_account_id(aws_account):
-    """if the input is an AWS account arn, it returns the correspondent
+def normalize_aws_account(aws_account):
+    """if the input is an AWS account arn, it returns the corresponding
     account id. If the input is already an account id it just returns it.
-    Otherwise it raises a InvalidAWSAccount identifier exception.
+    Otherwise it raises an InvalidAWSAccount exception.
     """
     match = arn_aws_account_re.match(aws_account)
     if match:

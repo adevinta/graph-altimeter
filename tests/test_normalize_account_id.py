@@ -1,4 +1,4 @@
-"""Tests for normalizing AWS accounts."""
+"""Tests for AWS account ID normalization."""
 import pytest
 from graph_altimeter.scan import normalize_account_id, InvalidAWSAccount
 
