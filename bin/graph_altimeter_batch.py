@@ -8,7 +8,7 @@ import logging
 from altimeter.core.config import AWSConfig
 
 from graph_altimeter import EnvVarNotSetError
-from graph_altimeter.scan import run, normalize_account_id
+from graph_altimeter.scan import run, normalize_aws_account
 from graph_altimeter.scan.config import AltimeterConfig
 from graph_altimeter.asset_inventory import get_aws_accounts
 
@@ -53,7 +53,7 @@ def run_scan():
                 i + 1,
                 len(accounts)
             )
-            account_id = normalize_account_id(account_id)
+            account_id = normalize_aws_account(account_id)
             config = AltimeterConfig.from_env()
             scan_config = config.config_dict(
                 account_id,

@@ -35,7 +35,7 @@ from graph_altimeter.scan.postprocess import postprocess
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
-arn_aws_account_re = re.compile('^arn:aws:iam::([0-9]{12}):root$')
+aws_account_arn_re = re.compile('^arn:aws:iam::([0-9]{12}):root$')
 
 aws_account_id_re = re.compile('^[0-9]{12}$')
 
@@ -177,7 +177,7 @@ def normalize_aws_account(aws_account):
     account id. If the input is already an account id it just returns it.
     Otherwise it raises an InvalidAWSAccount exception.
     """
-    match = arn_aws_account_re.match(aws_account)
+    match = aws_account_arn_re.match(aws_account)
     if match:
         return match.group(1)
     if aws_account_id_re.match(aws_account):
