@@ -8,7 +8,7 @@ import logging
 from altimeter.core.config import AWSConfig
 
 from graph_altimeter import EnvVarNotSetError
-from graph_altimeter.scan import run
+from graph_altimeter.scan import run, normalize_account_id
 from graph_altimeter.scan.config import AltimeterConfig
 from graph_altimeter.asset_inventory import get_aws_accounts
 
@@ -46,20 +46,21 @@ def run_scan():
         accounts = get_aws_accounts(asset_inventory_api_url)
 
     for i, account_id in enumerate(accounts):
-        logger.info(
-            "scanning account %s (%d/%d)",
-            account_id,
-            i + 1,
-            len(accounts)
-        )
-        config = AltimeterConfig.from_env()
-        scan_config = config.config_dict(
-            account_id,
-            target_account_role,
-            trampoline_account_role_arn,
-        )
-        altimeter_config = AWSConfig.parse_obj(scan_config)
         try:
+            logger.info(
+                "scanning account %s (%d/%d)",
+                account_id,
+                i + 1,
+                len(accounts)
+            )
+            account_id = normalize_account_id(account_id)
+            config = AltimeterConfig.from_env()
+            scan_config = config.config_dict(
+                account_id,
+                target_account_role,
+                trampoline_account_role_arn,
+            )
+            altimeter_config = AWSConfig.parse_obj(scan_config)
             run(altimeter_config, account_id)
         except Exception as e:
             logger.error(
